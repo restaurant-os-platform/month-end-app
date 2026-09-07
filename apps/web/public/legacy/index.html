@@ -12,6 +12,7 @@
 <meta name="description" content="Multi-department inventory counting, ordering, usage tracking, and reporting for hospitality teams."/>
 <meta name="app-version" content="1.0.0"/>
 <link rel="stylesheet" href="css/styles.css?v=live-inventory-fields-1"/>
+<link rel="stylesheet" href="css/dashboard.css?v=manager-brief-3"/>
 
 <!-- SheetJS for real .xlsx export; loadXLSXFallback() (defined below) swaps to a
      second CDN, and the app falls back to CSV if neither loads. -->
@@ -117,16 +118,7 @@
 
 <!-- DASHBOARD -->
 <div class="page active" id="page-dashboard">
-  <div class="page-header">
-    <div class="page-header-text"><h2>Dashboard</h2><p>Inventory across your departments at a glance.</p></div>
-    <div class="drop-wrap">
-      <button class="btn btn-secondary btn-sm" onclick="toggleMenu('dash-exp')">Export</button>
-      <div class="drop-menu" id="dash-exp">
-        <button onclick="printPage('Dashboard','page-dashboard')"> Print / PDF</button>
-        <button onclick="xlDashboard()"> Excel / CSV</button>
-      </div>
-    </div>
-  </div>
+  <div id="manager-dashboard"></div>
   <section class="dashboard-onboarding" id="dashboard-onboarding" aria-labelledby="dashboard-onboarding-title" hidden>
     <div class="dashboard-onboarding-head">
       <div>
@@ -138,14 +130,6 @@
     </div>
     <div class="dashboard-onboarding-steps" id="dashboard-onboarding-steps"></div>
   </section>
-  <div class="stat-grid" id="dash-stats"></div>
-  <div class="card">
-    <h3 style="margin-bottom:12px;font-size:0.95rem;">Recent Count Filings</h3>
-    <div class="table-wrap"><table>
-      <thead><tr><th>Date</th><th>Label</th><th>Items</th><th>Value</th><th></th></tr></thead>
-      <tbody id="dash-inv-tbody"></tbody>
-    </table></div>
-  </div>
 </div>
 
 <!-- PRODUCTS -->
@@ -1329,19 +1313,21 @@
 <script src="js/data/core-drinks-may-2026.js?v=core-drinks-may-2026-2"></script>
 <script src="js/data/spring-drinks-2026.js?v=spring-drinks-2026-1"></script>
 <script src="js/data/kitchen-menu-may-2026.js?v=kitchen-menu-may-2026-3"></script>
-<script src="js/state.js?v=usage-matching-1"></script>
+<script src="js/state.js?v=menu-cards-default-1"></script>
 <script src="js/columns.js"></script>
 <script src="js/utils.js"></script>
 <script src="js/store.js?v=par-levels-2026-08-26"></script>
 <script src="js/ui.js?v=menu-recipes-4"></script>
 <script src="js/profile.js?v=profile-workspace-1"></script>
-<script src="js/products.js?v=kitchen-menu-3"></script>
+<script src="js/fall-features.js?v=1"></script>
+<script src="js/products.js?v=shared-feature-cards-1"></script>
 <script src="js/inventory.js?v=usage-report-purchases-2"></script>
 <script src="js/orders.js"></script>
 <script src="js/usage.js?v=usage-matching-1"></script>
 <script src="js/suppliers.js"></script>
 <script src="js/reports.js"></script>
-<script src="js/export-tools.js?v=count-workflow-1"></script>
+<script src="js/dashboard.js?v=manager-brief-3"></script>
+<script src="js/export-tools.js?v=manager-brief-1"></script>
 <script src="js/voice-commands.js?v=count-voice-two-1"></script>
 <script src="js/voice.js?v=count-workflow-1"></script>
 <script src="js/master-search.js"></script>

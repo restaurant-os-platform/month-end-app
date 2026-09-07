@@ -97,6 +97,7 @@
       showPage(first);
     }
     if(typeof renderGeneralSettings==='function')renderGeneralSettings();
+    if(document.getElementById('page-dashboard')?.classList.contains('active')&&typeof renderDashboard==='function')renderDashboard();
   }
 
   async function loadAccess(){

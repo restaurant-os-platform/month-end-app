@@ -682,6 +682,8 @@ async function saveProduct(){
   const lastCountValue=document.getElementById('pm-last-count').value;
   const status=document.getElementById('pm-status').value;
   const prod={...existing,id:editingProductId||uid(),name,inventoryName:document.getElementById('pm-inventory-name').value.trim(),aliases:document.getElementById('pm-aliases').value.trim(),departments,unit:primary.unit,category:document.getElementById('pm-cat').value,subcategory:document.getElementById('pm-sub').value,cost:primary.cost||parseFloat(document.getElementById('pm-cost').value)||0,par:parseFloat(primary.par)||parseFloat(document.getElementById('pm-par').value)||0,sku:primary.sku||document.getElementById('pm-sku').value.trim(),notes:document.getElementById('pm-notes').value.trim(),suppliers:getProdSuppliers(),units:orderedUnits,lastCount:lastCountValue===''?null:parseFloat(lastCountValue)||0,status,archived:status==='delisted'};
+  prod.updatedAt=new Date().toISOString();
+  if(!existing)prod.createdAt=prod.updatedAt;
   const wasEditing=Boolean(editingProductId);
   const saveButton=document.getElementById('product-save-button');
   productSaveInProgress=true;saveButton.disabled=true;saveButton.textContent='Saving…';
@@ -1183,6 +1185,8 @@ function normalizeMenuLibraryItem(item,index=0){
     recipe:'',
     price:String(item?.price??item?.cost??'').replace(/^\$/,'').trim(),
     source:String(item?.source||'manual'),
+    ...(item?.createdAt?{createdAt:String(item.createdAt)}:{}),
+    ...(item?.updatedAt?{updatedAt:String(item.updatedAt)}:{}),
     linkedProductIds:[...new Set(structuredIngredients.filter(entry=>entry.linkKind==='product'&&entry.productId).map(entry=>entry.productId))],
     ingredientLinks:Object.fromEntries(structuredIngredients.map(entry=>[prepItemKey(entry.name),entry.linkKind==='product'?{kind:'product',productId:entry.productId,prepItemId:''}:{kind:'prep',productId:'',prepItemId:entry.prepItemId}]))
   };
@@ -1212,6 +1216,7 @@ function starterMenuLibrary(){
 
 function menuDepartmentIds(menu){
   const valid=new Set(activeDepartments().map(department=>department.id));
+  if(menu?.allDepartments)return [...valid];
   const source=Array.isArray(menu?.departmentIds)?menu.departmentIds:[menu?.departmentId];
   const ids=[...new Set(source.filter(id=>valid.has(id)))];
   return ids.length?ids:[activeDepartments()[0]?.id||'bar'];
@@ -1223,7 +1228,7 @@ function menuDepartmentLabel(menu){
 }
 
 function ensureMenuLibrary(){
-  let changed=false;
+  let changed=ensureFallFeaturesMenu(state);
   const libraryVersion=Number(state.menuLibraryVersion)||0;
   if(!Array.isArray(state.menus)){state.menus=[];changed=true;}
   const seen=new Set();
@@ -1233,12 +1238,15 @@ function ensureMenuLibrary(){
       id:menu.id||uid(),
       departmentId:menuDepartmentIds(menu)[0],
       departmentIds:menuDepartmentIds(menu),
+      ...(menu.allDepartments?{allDepartments:true}:{}),
       name:String(menu.name||`Menu ${index+1}`).trim()||`Menu ${index+1}`,
       description:String(menu.description||'').trim(),
       active:menu.active!==false,
       archived:!!menu.archived,
       sourceFile:String(menu.sourceFile||''),
       importedAt:String(menu.importedAt||''),
+      ...(menu.createdAt?{createdAt:String(menu.createdAt)}:{}),
+      ...(menu.updatedAt?{updatedAt:String(menu.updatedAt)}:{}),
       items:(Array.isArray(menu.items)?menu.items:[]).map((item,itemIndex)=>{
         const normalizedItem=normalizeMenuLibraryItem(item,itemIndex);
         if(libraryVersion<3)normalizedItem.linkedProductIds=menuItemProductMatches(normalizedItem,menu.departmentId).map(product=>product.id);
@@ -1477,11 +1485,11 @@ function showMenuPagePicker(){menuPageMenuId='';const search=document.getElement
 function setMenuPageMenu(menuId){menuId?openMenuPageMenu(menuId):showMenuPagePicker();}
 function setMenuPageItemView(view){
   menuPageItemView=view==='cards'?'cards':'list';
-  try{localStorage.setItem('month_end_menu_item_view',menuPageItemView);}catch(error){}
+  try{localStorage.setItem('month_end_menu_item_view_v2',menuPageItemView);}catch(error){}
   renderMenuPage();
 }
 function restoreMenuPageItemView(){
-  try{menuPageItemView=localStorage.getItem('month_end_menu_item_view')==='cards'?'cards':'list';}catch(error){menuPageItemView='list';}
+  try{menuPageItemView=localStorage.getItem('month_end_menu_item_view_v2')==='list'?'list':'cards';}catch(error){menuPageItemView='cards';}
 }
 function menuPageViewToggleHtml(){
   return`<div class="menu-item-view-toggle" role="group" aria-label="Menu item view"><button class="${menuPageItemView==='list'?'active':''}" type="button" aria-pressed="${menuPageItemView==='list'}" onclick="setMenuPageItemView('list')" title="List view"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 6h12M8 12h12M8 18h12"></path><circle cx="4" cy="6" r="1"></circle><circle cx="4" cy="12" r="1"></circle><circle cx="4" cy="18" r="1"></circle></svg><span>List</span></button><button class="${menuPageItemView==='cards'?'active':''}" type="button" aria-pressed="${menuPageItemView==='cards'}" onclick="setMenuPageItemView('cards')" title="Card view"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"></rect><rect x="14" y="3" width="7" height="7" rx="1"></rect><rect x="3" y="14" width="7" height="7" rx="1"></rect><rect x="14" y="14" width="7" height="7" rx="1"></rect></svg><span>Cards</span></button></div>`;
@@ -1650,6 +1658,10 @@ function saveMenuItemEditor(){
   const name=String(menuItemEditDraft.name||'').trim();if(!name){toast('Item name is required.',true);return;}
   menuItemEditDraft.name=name;menuItemEditDraft.ingredients=(menuItemEditDraft.ingredients||[]).filter(entry=>String(entry.name||'').trim()).map(entry=>({...entry,name:String(entry.name).trim(),amount:String(entry.amount||'').trim()}));
   const saved=normalizeMenuLibraryItem(menuItemEditDraft);const index=menu.items.findIndex(entry=>entry.id===saved.id);
+  const changedAt=new Date().toISOString();
+  saved.updatedAt=changedAt;
+  if(index<0)saved.createdAt=changedAt;
+  menu.updatedAt=changedAt;
   if(index>=0)menu.items[index]=saved;else menu.items.push(saved);
   menuItemEditDraft=null;menuItemEditingMenuId='';menuItemEditIsNew=false;save();renderMenuPage();if(menuPageEditingMenuId)renderPageMenuEditor();openMenuItemView(saved.id);toast('Menu item saved.');
 }
@@ -1795,7 +1807,7 @@ function openMenuItemView(id,preserveVariant=false){
   const activeVariant=variants.find(variant=>variant.id===menuItemViewVariantId)||variants[0];const ingredients=menuRecipeIngredients(item);
   const body=document.getElementById('menu-item-view-body');
   const section=(label,value,key)=>value?`<section class="product-view-section kitchen-knowledge-section" data-content-access="${escapeHtml(item.contentAccessKeys?.[key]||'')}"><div class="label">${escapeHtml(label)}</div><p class="menu-method-copy">${escapeHtml(value)}</p></section>`:'';
-  const kitchenView=menuDepartmentIds(menu).includes('kitchen')?`${section('Product knowledge',item.productKnowledge,'productKnowledge')}${item.cookTime?`<div class="kitchen-cook-time"><span>Cook time</span><strong>${escapeHtml(item.cookTime)}</strong></div>`:''}${section('Cooking instructions',item.cookingInstructions,'cookingInstructions')}${section('Plating instructions',item.platingInstructions,'platingInstructions')}${section('Presentation',item.presentation,'presentation')}${section('Accompaniment',item.accompaniment,'accompaniment')}${section('Equipment & flatware',item.equipment,'equipment')}${section('Kitchen notes',item.kitchenNotes,'kitchenNotes')}`:`${item.description?section('How to make it',item.description,'description'):''}`;
+  const kitchenView=menuDepartmentIds(menu).includes('kitchen')&&(item.cookingInstructions||item.platingInstructions||item.kitchenNotes||!item.glassware)?`${section('Product knowledge',item.productKnowledge,'productKnowledge')}${item.cookTime?`<div class="kitchen-cook-time"><span>Cook time</span><strong>${escapeHtml(item.cookTime)}</strong></div>`:''}${section('Cooking instructions',item.cookingInstructions,'cookingInstructions')}${section('Plating instructions',item.platingInstructions,'platingInstructions')}${section('Presentation',item.presentation,'presentation')}${section('Accompaniment',item.accompaniment,'accompaniment')}${section('Equipment & flatware',item.equipment,'equipment')}${section('Kitchen notes',item.kitchenNotes,'kitchenNotes')}`:`${item.description?section('How to make it',item.description,'description'):''}`;
   const sourcePages=[item.sourcePages?.cookAndPresent?`Cook & Present pp. ${item.sourcePages.cookAndPresent}`:'',item.sourcePages?.productKnowledge?`Product Knowledge p. ${item.sourcePages.productKnowledge}`:''].filter(Boolean).join(' · ');
   const imageUrlEncoded=encodeURIComponent(item.imageUrl||''),imageNameEncoded=encodeURIComponent(item.name||'');
   const imageView=item.imageUrl?`<button class="menu-item-hero-image" type="button" data-content-access="${escapeHtml(item.contentAccessKeys?.image||'')}" aria-label="View full-size image of ${escapeHtml(item.name)}" onclick="openMenuItemImage(decodeURIComponent('${imageUrlEncoded}'),decodeURIComponent('${imageNameEncoded}'))"><img src="${escapeHtml(item.imageUrl)}" alt="${escapeHtml(item.name)}"><span class="menu-item-image-magnifier" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6"></circle><path d="m16 16 4 4M11 8v6M8 11h6"></path></svg><small>View full size</small></span></button>`:'';

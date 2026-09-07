@@ -58,9 +58,12 @@ function xlSuppliers(){
 }
 function xlDashboard(){
   closeAllMenus();
-  const lastInv=state.inventories[0];let totalVal=0;if(lastInv)Object.entries(lastInv.items).forEach(([id,qty])=>{const p=getProduct(id);if(p)totalVal+=p.cost*qty;});
-  const rows=[['Metric','Value'],['Total Products',state.products.length],['Last Count',lastInv?lastInv.date:'—'],['Inventory Value ($)',+totalVal.toFixed(2)],['Orders',state.orders.length],['Suppliers',state.suppliers.length],['Counts Filed',state.inventories.length]];
-  xlDown([{name:'Dashboard',rows}],`dashboard_${today()}.xlsx`);
+  const m=dashboardModel(state,new Date(),dashboardCan);
+  const rows=[['Manager brief','Value'],['Generated',new Date().toISOString()]];
+  if(dashboardCan('inventory'))rows.push(['Latest main count',m.count?.label||'No count'],['Count date',m.count?.date||''],['Count status',m.count?.status||''],['Counted value at current costs',m.counted?+m.value.toFixed(2):''],['Products without cost',m.unpriced],['Products at or below par',m.low.length]);
+  if(dashboardCan('usage'))rows.push(['Latest usage report',m.usage?.fileName||'No report'],['Usage period start',m.usage?.periodStart||''],['Usage period end',m.usage?.periodEnd||''],['Reported cost variance',m.variance===null?'':+m.variance.toFixed(2)],['Usage rows needing review',m.review.length]);
+  if(dashboardCan('menu'))m.features.forEach(menu=>rows.push(['Current menu',menu.name+' — '+(menu.allDepartments?'All departments':menu.departmentId)]));
+  xlDown([{name:'Manager brief',rows}],`dashboard_${today()}.xlsx`);
 }
 
 function printPage(title,pageId){closeAllMenus();const pageEl=document.getElementById(pageId);if(!pageEl)return;const tableHTML=pageEl.querySelector('.table-wrap')?.outerHTML||'';const statHTML=pageEl.querySelector('.stat-grid')?.outerHTML||'';const w=window.open('','_blank','width=1000,height=750');w.document.write(`<!DOCTYPE html><html><head><title>${title}</title><style>body{font-family:Arial,sans-serif;padding:20px;font-size:12px;}h2{margin:0 0 4px;}p{margin:0 0 14px;color:#666;font-size:11px;}table{width:100%;border-collapse:collapse;}th{background:#333;color:#fff;padding:7px;text-align:left;font-size:11px;}td{padding:6px 7px;border-bottom:1px solid #ddd;}tr:nth-child(even) td{background:#f9f9f9;}.stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-bottom:16px;}.stat-card{border:1px solid #ccc;border-radius:6px;padding:12px;}.stat-card .label{font-size:10px;color:#888;text-transform:uppercase;}.stat-card .value{font-size:20px;font-weight:700;}</style></head><body><h2>Keg Bar — ${title}</h2><p>Exported ${new Date().toLocaleDateString('en-CA')}</p>${statHTML}${tableHTML}<script>window.onload=function(){window.print();}<\/script></body></html>`);w.document.close();}
