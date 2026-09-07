@@ -617,6 +617,9 @@ button.menu-manager-row-main{border:0;background:transparent;color:var(--text);t
 .menu-item-detail-copy{min-width:0;}
 .menu-item-hero-image{position:sticky;top:0;display:block;overflow:hidden;width:100%;border:1px solid var(--border);border-radius:14px;background:var(--surface2);padding:0;cursor:zoom-in;text-align:left;}
 .menu-item-hero-image img{display:block;width:100%;height:auto;max-height:70vh;object-fit:contain;}
+/* These PDF photos are stored upside down; orient every menu and dashboard display. */
+img[src$="/fall-features-2026/blackened-blue-cheese-sirloin.jpg"],
+img[src$="/fall-features-2026/guinness-braised-lamb-shank.jpg"]{rotate:180deg;}
 .menu-item-image-magnifier{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:7px;background:rgb(14 25 43 / 54%);color:#fff;opacity:0;transition:opacity .16s ease;}
 .menu-item-image-magnifier svg{width:36px;height:36px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;}
 .menu-item-image-magnifier small{font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.05em;}
