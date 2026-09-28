@@ -4,6 +4,7 @@ import { createClient } from "@/lib/supabase/server";
 
 export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
+export const maxDuration = 60;
 
 const MAX_AUDIO_BYTES = 25 * 1024 * 1024;
 const MAX_REQUEST_BYTES = MAX_AUDIO_BYTES + 64 * 1024;
@@ -18,6 +19,7 @@ function json(body: unknown, status = 200) {
 }
 
 export async function POST(request: Request) {
+  const startedAt = performance.now();
   const supabase = await createClient();
   const { data: claimsData } = await supabase.auth.getClaims();
   if (!claimsData?.claims?.sub) return json({ error: "Unauthorized" }, 401);
@@ -49,6 +51,8 @@ export async function POST(request: Request) {
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), TRANSCRIPTION_TIMEOUT_MS);
   let response: Response;
+  let result: { error?: { message?: string }; text?: string };
+  const providerStartedAt = performance.now();
   try {
     response = await fetch("https://api.openai.com/v1/audio/transcriptions", {
       method: "POST",
@@ -57,7 +61,19 @@ export async function POST(request: Request) {
       cache: "no-store",
       signal: controller.signal,
     });
+    result = await response.json();
+    console.info("[transcribe] completed", {
+      status: response.status, audioBytes: audio.size,
+      preparationMs: Math.round(providerStartedAt - startedAt),
+      providerMs: Math.round(performance.now() - providerStartedAt),
+      totalMs: Math.round(performance.now() - startedAt),
+      requestId: response.headers.get("x-request-id"),
+    });
   } catch (error) {
+    console.error("[transcribe] failed", {
+      kind: error instanceof Error ? error.name : "UnknownError",
+      audioBytes: audio.size, totalMs: Math.round(performance.now() - startedAt),
+    });
     if (error instanceof Error && error.name === "AbortError") {
       return json({ error: "Voice transcription timed out. Please try a shorter recording." }, 504);
     }
@@ -65,7 +81,6 @@ export async function POST(request: Request) {
   } finally {
     clearTimeout(timeout);
   }
-  const result = await response.json().catch(() => ({})) as { error?: { message?: string }; text?: string };
   if (!response.ok) {
     return json({ error: result.error?.message ?? "Voice transcription failed." }, response.status);
   }

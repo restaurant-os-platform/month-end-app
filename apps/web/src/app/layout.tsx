@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   },
   description: "Secure inventory operations for hospitality teams.",
   applicationName: "Month End",
-  manifest: "/manifest.webmanifest",
+  manifest: "/month-end/manifest.webmanifest",
   appleWebApp: {
     capable: true,
     title: "Month End",

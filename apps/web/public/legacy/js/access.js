@@ -48,8 +48,8 @@
     window.profileCanManageProfiles=()=>Boolean(access.canManageUsers);
     window.openCurrentProfileSettings=()=>{closeAllMenus();if(typeof dismissSidebarHoverMenu==='function')dismissSidebarHoverMenu(document.querySelector('.profile-menu-wrap'));showPage('profile',{profileOnly:true});};
     window.logoutProfile=async()=>{
-      try{await fetch('/api/sign-out',{method:'POST',credentials:'include'});}catch(e){}
-      window.top.location.href='/login';
+      try{await fetch('/month-end/api/sign-out',{method:'POST',credentials:'include'});}catch(e){}
+      window.top.location.href='/month-end/login';
     };
     window.setCurrentProfile=()=>toast('Each person now signs in with their own account.',true);
 
@@ -76,7 +76,7 @@
     document.querySelectorAll('[data-settings-key="profiles"]').forEach(button=>{
       button.textContent='';
       button.innerHTML='<span class="settings-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-4 2.5-6 6-6s6 2 6 6M16 5a3 3 0 0 1 0 6M17 14c2.6.4 4 2.3 4 5"/></svg></span><span>Users & Access</span>';
-      button.onclick=()=>{window.top.location.href='/app/people';};
+      button.onclick=()=>{window.top.location.href='/month-end/app/people';};
       button.style.display=access.canManageUsers?'flex':'none';
     });
     document.querySelectorAll('[data-pos-integrations-link]').forEach(button=>{
@@ -102,8 +102,8 @@
 
   async function loadAccess(){
     try{
-      const response=await fetch('/api/access-context',{credentials:'include',cache:'no-store'});
-      if(response.status===401){window.top.location.href='/login';return;}
+      const response=await fetch('/month-end/api/access-context',{credentials:'include',cache:'no-store'});
+      if(response.status===401){window.top.location.href='/month-end/login';return;}
       if(!response.ok)return;
       access=await response.json();
       window.serverAccessContext=access;
@@ -111,7 +111,7 @@
     }catch(error){console.error('Could not load account access.',error);}
   }
 
-  window.recordServerEvent=(event)=>localOnlyMode?Promise.resolve():fetch('/api/audit-events',{method:'POST',credentials:'include',headers:{'Content-Type':'application/json'},body:JSON.stringify(event)}).catch(()=>null);
+  window.recordServerEvent=(event)=>localOnlyMode?Promise.resolve():fetch('/month-end/api/audit-events',{method:'POST',credentials:'include',headers:{'Content-Type':'application/json'},body:JSON.stringify(event)}).catch(()=>null);
 
   window.addEventListener('load',loadAccess);
 })();

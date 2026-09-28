@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { modulePath } from "@/lib/module-path";
 
 type WorkspaceShellProps = {
   email: string;
@@ -25,7 +26,7 @@ export function WorkspaceShell({ email, iframeQuery, initialPath, organizationNa
     document.title = `${title} · Month End`;
 
     function sendCurrentRoute() {
-      const path = `${window.location.pathname}${window.location.search}`;
+      const path = `${window.location.pathname}${window.location.search}`.replace(/^\/month-end(?=\/)/, "");
       if (!path.startsWith("/app/")) return;
       currentPathRef.current = path;
       frameRef.current?.contentWindow?.postMessage({ type: "month-end:apply-route", path }, window.location.origin);
@@ -36,7 +37,7 @@ export function WorkspaceShell({ email, iframeQuery, initialPath, organizationNa
       if (event.data?.type !== "month-end:route-change" || !event.data.path?.startsWith("/app/")) return;
       const nextPath = event.data.path;
       if (nextPath !== currentPathRef.current) {
-        window.history[event.data.replace ? "replaceState" : "pushState"]({ monthEndRoute: true }, "", nextPath);
+        window.history[event.data.replace ? "replaceState" : "pushState"]({ monthEndRoute: true }, "", modulePath(nextPath));
         currentPathRef.current = nextPath;
       }
       if (event.data.title) document.title = `${event.data.title} · Month End`;
@@ -57,7 +58,7 @@ export function WorkspaceShell({ email, iframeQuery, initialPath, organizationNa
         className="legacy-frame"
         onLoad={() => frameRef.current?.contentWindow?.postMessage({ type: "month-end:apply-route", path: initialPath }, window.location.origin)}
         ref={frameRef}
-        src={`/legacy/index.html?${iframeQuery}`}
+        src={`/month-end/legacy/index.html?${iframeQuery}`}
         title={`${organizationName} inventory workspace for ${email}`}
       />
     </main>

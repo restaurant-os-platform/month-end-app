@@ -3,7 +3,7 @@ globalThis.KITCHEN_MENU_MAY_2026=[
   {
     "name": "Baked Brie",
     "category": "Starters",
-    "imageUrl": "/legacy/assets/menu/kitchen-dinner-may-2026/baked-brie.jpg?v=kitchen-dinner-3",
+    "imageUrl": "/month-end/legacy/assets/menu/kitchen-dinner-may-2026/baked-brie.jpg?v=kitchen-dinner-3",
     "ingredients": [
       {
         "name": "Brie Cheese",
@@ -58,7 +58,7 @@ globalThis.KITCHEN_MENU_MAY_2026=[
   {
     "name": "Baked Garlic Shrimp",
     "category": "Starters",
-    "imageUrl": "/legacy/assets/menu/kitchen-dinner-may-2026/baked-garlic-shrimp.jpg?v=kitchen-dinner-3",
+    "imageUrl": "/month-end/legacy/assets/menu/kitchen-dinner-may-2026/baked-garlic-shrimp.jpg?v=kitchen-dinner-3",
     "ingredients": [
       {
         "name": "Baked garlic shrimp, prepped",
@@ -101,7 +101,7 @@ globalThis.KITCHEN_MENU_MAY_2026=[
   {
     "name": "Beef Tartare (Quebec Only)",
     "category": "Starters",
-    "imageUrl": "/legacy/assets/menu/kitchen-dinner-may-2026/beef-tartare-quebec-only.jpg?v=kitchen-dinner-3",
+    "imageUrl": "/month-end/legacy/assets/menu/kitchen-dinner-may-2026/beef-tartare-quebec-only.jpg?v=kitchen-dinner-3",
     "ingredients": [
       {
         "name": "Filet, Blotted Dry, Prepped",
@@ -168,7 +168,7 @@ globalThis.KITCHEN_MENU_MAY_2026=[
   {
     "name": "Calamari",
     "category": "Starters",
-    "imageUrl": "/legacy/assets/menu/kitchen-dinner-may-2026/calamari.jpg?v=kitchen-dinner-3",
+    "imageUrl": "/month-end/legacy/assets/menu/kitchen-dinner-may-2026/calamari.jpg?v=kitchen-dinner-3",
     "ingredients": [
       {
         "name": "Calamari, Portioned",
@@ -231,7 +231,7 @@ globalThis.KITCHEN_MENU_MAY_2026=[
   {
     "name": "Escargot",
     "category": "Starters",
-    "imageUrl": "/legacy/assets/menu/kitchen-dinner-may-2026/escargot.jpg?v=kitchen-dinner-3",
+    "imageUrl": "/month-end/legacy/assets/menu/kitchen-dinner-may-2026/escargot.jpg?v=kitchen-dinner-3",
     "ingredients": [
       {
         "name": "Escargot, prepped",
@@ -274,7 +274,7 @@ globalThis.KITCHEN_MENU_MAY_2026=[
   {
     "name": "French Onion Soup",
     "category": "Starters",
-    "imageUrl": "/legacy/assets/menu/kitchen-dinner-may-2026/french-onion-soup.jpg?v=kitchen-dinner-3",
+    "imageUrl": "/month-end/legacy/assets/menu/kitchen-dinner-may-2026/french-onion-soup.jpg?v=kitchen-dinner-3",
     "ingredients": [
       {
         "name": "Onion soup, hot",
@@ -321,7 +321,7 @@ globalThis.KITCHEN_MENU_MAY_2026=[
   {
     "name": "Garlic Cheese Toast",
     "category": "Starters",
-    "imageUrl": "/legacy/assets/menu/kitchen-dinner-may-2026/garlic-cheese-toast.jpg?v=kitchen-dinner-3",
+    "imageUrl": "/month-end/legacy/assets/menu/kitchen-dinner-may-2026/garlic-cheese-toast.jpg?v=kitchen-dinner-3",
     "ingredients": [
       {
         "name": "1/3 baguette, prepped",
@@ -360,7 +360,7 @@ globalThis.KITCHEN_MENU_MAY_2026=[
   {
     "name": "Mushrooms Neptune",
     "category": "Starters",
-    "imageUrl": "/legacy/assets/menu/kitchen-dinner-may-2026/mushrooms-neptune.jpg?v=kitchen-dinner-3",
+    "imageUrl": "/month-end/legacy/assets/menu/kitchen-dinner-may-2026/mushrooms-neptune.jpg?v=kitchen-dinner-3",
     "ingredients": [
       {
         "name": "Mushrooms Neptune, prepped",
@@ -403,7 +403,7 @@ globalThis.KITCHEN_MENU_MAY_2026=[
   {
     "name": "Scallops & Bacon",
     "category": "Starters",
-    "imageUrl": "/legacy/assets/menu/kitchen-dinner-may-2026/scallops-bacon.jpg?v=kitchen-dinner-3",
+    "imageUrl": "/month-end/legacy/assets/menu/kitchen-dinner-may-2026/scallops-bacon.jpg?v=kitchen-dinner-3",
     "ingredients": [
       {
         "name": "Scallops & bacon skewers, prepped",
@@ -446,7 +446,7 @@ globalThis.KITCHEN_MENU_MAY_2026=[
   {
     "name": "Shrimp Cocktail",
     "category": "Starters",
-    "imageUrl": "/legacy/assets/menu/kitchen-dinner-may-2026/shrimp-cocktail.jpg?v=kitchen-dinner-3",
+    "imageUrl": "/month-end/legacy/assets/menu/kitchen-dinner-may-2026/shrimp-cocktail.jpg?v=kitchen-dinner-3",
     "ingredients": [
       {
         "name": "Shrimp 13/15, prepped, cold",
@@ -493,7 +493,7 @@ globalThis.KITCHEN_MENU_MAY_2026=[
   {
     "name": "Smoked Gouda Spinach Dip",
     "category": "Starters",
-    "imageUrl": "/legacy/assets/menu/kitchen-dinner-may-2026/smoked-gouda-spinach-dip.jpg?v=kitchen-dinner-3",
+    "imageUrl": "/month-end/legacy/assets/menu/kitchen-dinner-may-2026/smoked-gouda-spinach-dip.jpg?v=kitchen-dinner-3",
     "ingredients": [
       {
         "name": "Spinach Dip, prepped",
@@ -536,7 +536,7 @@ globalThis.KITCHEN_MENU_MAY_2026=[
   {
     "name": "Three Pepper Wings",
     "category": "Starters",
-    "imageUrl": "/legacy/assets/menu/kitchen-dinner-may-2026/three-pepper-wings.jpg?v=kitchen-dinner-3",
+    "imageUrl": "/month-end/legacy/assets/menu/kitchen-dinner-may-2026/three-pepper-wings.jpg?v=kitchen-dinner-3",
     "ingredients": [
       {
         "name": "Wings",
@@ -591,7 +591,7 @@ globalThis.KITCHEN_MENU_MAY_2026=[
   {
     "name": "Tuna Tartare",
     "category": "Starters",
-    "imageUrl": "/legacy/assets/menu/kitchen-dinner-may-2026/tuna-tartare.jpg?v=kitchen-dinner-3",
+    "imageUrl": "/month-end/legacy/assets/menu/kitchen-dinner-may-2026/tuna-tartare.jpg?v=kitchen-dinner-3",
     "ingredients": [
       {
         "name": "Tuna, diced, prepped",
@@ -654,7 +654,7 @@ globalThis.KITCHEN_MENU_MAY_2026=[
   {
     "name": "Caesar",
     "category": "Salads",
-    "imageUrl": "/legacy/assets/menu/kitchen-dinner-may-2026/caesar.jpg?v=kitchen-dinner-3",
+    "imageUrl": "/month-end/legacy/assets/menu/kitchen-dinner-may-2026/caesar.jpg?v=kitchen-dinner-3",
     "ingredients": [
       {
         "name": "Romaine lettuce, prepped",
@@ -709,7 +709,7 @@ globalThis.KITCHEN_MENU_MAY_2026=[
   {
     "name": "Iceberg Wedge",
     "category": "Salads",
-    "imageUrl": "/legacy/assets/menu/kitchen-dinner-may-2026/iceberg-wedge.jpg?v=kitchen-dinner-3",
+    "imageUrl": "/month-end/legacy/assets/menu/kitchen-dinner-may-2026/iceberg-wedge.jpg?v=kitchen-dinner-3",
     "ingredients": [
       {
         "name": "Blue cheese dressing, prepped",
@@ -768,7 +768,7 @@ globalThis.KITCHEN_MENU_MAY_2026=[
   {
     "name": "Mixed Greens",
     "category": "Salads",
-    "imageUrl": "/legacy/assets/menu/kitchen-dinner-may-2026/mixed-greens.jpg?v=kitchen-dinner-3",
+    "imageUrl": "/month-end/legacy/assets/menu/kitchen-dinner-may-2026/mixed-greens.jpg?v=kitchen-dinner-3",
     "ingredients": [
       {
         "name": "Artisan lettuce blend, prepped",
@@ -827,7 +827,7 @@ globalThis.KITCHEN_MENU_MAY_2026=[
   {
     "name": "Side Caesar",
     "category": "Salads",
-    "imageUrl": "/legacy/assets/menu/kitchen-dinner-may-2026/side-caesar.jpg?v=kitchen-dinner-3",
+    "imageUrl": "/month-end/legacy/assets/menu/kitchen-dinner-may-2026/side-caesar.jpg?v=kitchen-dinner-3",
     "ingredients": [
       {
         "name": "Romaine lettuce, prepped",
@@ -882,7 +882,7 @@ globalThis.KITCHEN_MENU_MAY_2026=[
   {
     "name": "Side Iceberg Wedge",
     "category": "Salads",
-    "imageUrl": "/legacy/assets/menu/kitchen-dinner-may-2026/side-iceberg-wedge.jpg?v=kitchen-dinner-3",
+    "imageUrl": "/month-end/legacy/assets/menu/kitchen-dinner-may-2026/side-iceberg-wedge.jpg?v=kitchen-dinner-3",
     "ingredients": [
       {
         "name": "Blue cheese dressing, prepped",
@@ -941,7 +941,7 @@ globalThis.KITCHEN_MENU_MAY_2026=[
   {
     "name": "Side Mixed Greens",
     "category": "Salads",
-    "imageUrl": "/legacy/assets/menu/kitchen-dinner-may-2026/side-mixed-greens.jpg?v=kitchen-dinner-3",
+    "imageUrl": "/month-end/legacy/assets/menu/kitchen-dinner-may-2026/side-mixed-greens.jpg?v=kitchen-dinner-3",
     "ingredients": [
       {
         "name": "Artisan lettuce blend, prepped",
@@ -1000,7 +1000,7 @@ globalThis.KITCHEN_MENU_MAY_2026=[
   {
     "name": "BBQ Pork Ribs",
     "category": "Mains",
-    "imageUrl": "/legacy/assets/menu/kitchen-dinner-may-2026/bbq-pork-ribs.jpg?v=kitchen-dinner-3",
+    "imageUrl": "/month-end/legacy/assets/menu/kitchen-dinner-may-2026/bbq-pork-ribs.jpg?v=kitchen-dinner-3",
     "ingredients": [
       {
         "name": "Pork back ribs, prepped",
@@ -1059,7 +1059,7 @@ globalThis.KITCHEN_MENU_MAY_2026=[
   {
     "name": "Mushroom Risotto",
     "category": "Mains",
-    "imageUrl": "/legacy/assets/menu/kitchen-dinner-may-2026/mushroom-risotto.jpg?v=kitchen-dinner-3",
+    "imageUrl": "/month-end/legacy/assets/menu/kitchen-dinner-may-2026/mushroom-risotto.jpg?v=kitchen-dinner-3",
     "ingredients": [
       {
         "name": "Salted Butter",
@@ -1114,7 +1114,7 @@ globalThis.KITCHEN_MENU_MAY_2026=[
   {
     "name": "Keg Burger",
     "category": "Burgers & Bar",
-    "imageUrl": "/legacy/assets/menu/kitchen-dinner-may-2026/keg-burger.jpg?v=kitchen-dinner-3",
+    "imageUrl": "/month-end/legacy/assets/menu/kitchen-dinner-may-2026/keg-burger.jpg?v=kitchen-dinner-3",
     "ingredients": [
       {
         "name": "Carnivore Patty",
@@ -1197,7 +1197,7 @@ globalThis.KITCHEN_MENU_MAY_2026=[
   {
     "name": "Nachos",
     "category": "Burgers & Bar",
-    "imageUrl": "/legacy/assets/menu/kitchen-dinner-may-2026/nachos.jpg?v=kitchen-dinner-3",
+    "imageUrl": "/month-end/legacy/assets/menu/kitchen-dinner-may-2026/nachos.jpg?v=kitchen-dinner-3",
     "ingredients": [
       {
         "name": "Keg cheese blend",
@@ -1284,7 +1284,7 @@ globalThis.KITCHEN_MENU_MAY_2026=[
   {
     "name": "Prime Rib Sandwich",
     "category": "Burgers & Bar",
-    "imageUrl": "/legacy/assets/menu/kitchen-dinner-may-2026/prime-rib-sandwich.jpg?v=kitchen-dinner-3",
+    "imageUrl": "/month-end/legacy/assets/menu/kitchen-dinner-may-2026/prime-rib-sandwich.jpg?v=kitchen-dinner-3",
     "ingredients": [
       {
         "name": "Red wine herb jus, hot - For reheating",
@@ -1351,7 +1351,7 @@ globalThis.KITCHEN_MENU_MAY_2026=[
   {
     "name": "Prime Rib Sliders",
     "category": "Burgers & Bar",
-    "imageUrl": "/legacy/assets/menu/kitchen-dinner-may-2026/prime-rib-sliders.jpg?v=kitchen-dinner-3",
+    "imageUrl": "/month-end/legacy/assets/menu/kitchen-dinner-may-2026/prime-rib-sliders.jpg?v=kitchen-dinner-3",
     "ingredients": [
       {
         "name": "Slider buns, thawed, cut in half",
@@ -1410,7 +1410,7 @@ globalThis.KITCHEN_MENU_MAY_2026=[
   {
     "name": "Mushroom Rice",
     "category": "Accompaniments",
-    "imageUrl": "/legacy/assets/menu/kitchen-dinner-may-2026/mushroom-rice.jpg?v=kitchen-dinner-3",
+    "imageUrl": "/month-end/legacy/assets/menu/kitchen-dinner-may-2026/mushroom-rice.jpg?v=kitchen-dinner-3",
     "ingredients": [
       {
         "name": "Mushroom rice, prepped",
@@ -1445,7 +1445,7 @@ globalThis.KITCHEN_MENU_MAY_2026=[
   {
     "name": "Baked Potato",
     "category": "Accompaniments",
-    "imageUrl": "/legacy/assets/menu/kitchen-dinner-may-2026/baked-potato.jpg?v=kitchen-dinner-3",
+    "imageUrl": "/month-end/legacy/assets/menu/kitchen-dinner-may-2026/baked-potato.jpg?v=kitchen-dinner-3",
     "ingredients": [
       {
         "name": "Butter",
@@ -1500,7 +1500,7 @@ globalThis.KITCHEN_MENU_MAY_2026=[
   {
     "name": "Fries",
     "category": "Accompaniments",
-    "imageUrl": "/legacy/assets/menu/kitchen-dinner-may-2026/fries.jpg?v=kitchen-dinner-3",
+    "imageUrl": "/month-end/legacy/assets/menu/kitchen-dinner-may-2026/fries.jpg?v=kitchen-dinner-3",
     "ingredients": [
       {
         "name": "Keg fries, frozen",
@@ -1543,7 +1543,7 @@ globalThis.KITCHEN_MENU_MAY_2026=[
   {
     "name": "Seasonal Vegetables",
     "category": "Accompaniments",
-    "imageUrl": "/legacy/assets/menu/kitchen-dinner-may-2026/seasonal-vegetables.jpg?v=kitchen-dinner-3",
+    "imageUrl": "/month-end/legacy/assets/menu/kitchen-dinner-may-2026/seasonal-vegetables.jpg?v=kitchen-dinner-3",
     "ingredients": [
       {
         "name": "Mixed Vegetables, Prepped",
@@ -1590,7 +1590,7 @@ globalThis.KITCHEN_MENU_MAY_2026=[
   {
     "name": "Garlic Mashed Potatoes",
     "category": "Accompaniments",
-    "imageUrl": "/legacy/assets/menu/kitchen-dinner-may-2026/garlic-mashed-potatoes.jpg?v=kitchen-dinner-3",
+    "imageUrl": "/month-end/legacy/assets/menu/kitchen-dinner-may-2026/garlic-mashed-potatoes.jpg?v=kitchen-dinner-3",
     "ingredients": [
       {
         "name": "Garlic mashed potatoes, prepped",
@@ -1625,7 +1625,7 @@ globalThis.KITCHEN_MENU_MAY_2026=[
   {
     "name": "Side Order of Keg Fries",
     "category": "Accompaniments",
-    "imageUrl": "/legacy/assets/menu/kitchen-dinner-may-2026/side-order-of-keg-fries.jpg?v=kitchen-dinner-3",
+    "imageUrl": "/month-end/legacy/assets/menu/kitchen-dinner-may-2026/side-order-of-keg-fries.jpg?v=kitchen-dinner-3",
     "ingredients": [
       {
         "name": "Keg fries, frozen",
@@ -1668,7 +1668,7 @@ globalThis.KITCHEN_MENU_MAY_2026=[
   {
     "name": "Truffle Fries (Accompaniment)",
     "category": "Accompaniments",
-    "imageUrl": "/legacy/assets/menu/kitchen-dinner-may-2026/truffle-fries-accompaniment.jpg?v=kitchen-dinner-3",
+    "imageUrl": "/month-end/legacy/assets/menu/kitchen-dinner-may-2026/truffle-fries-accompaniment.jpg?v=kitchen-dinner-3",
     "ingredients": [
       {
         "name": "Keg Fries, frozen",
@@ -1723,7 +1723,7 @@ globalThis.KITCHEN_MENU_MAY_2026=[
   {
     "name": "Twice Baked Potato",
     "category": "Accompaniments",
-    "imageUrl": "/legacy/assets/menu/kitchen-dinner-may-2026/twice-baked-potato.jpg?v=kitchen-dinner-3",
+    "imageUrl": "/month-end/legacy/assets/menu/kitchen-dinner-may-2026/twice-baked-potato.jpg?v=kitchen-dinner-3",
     "ingredients": [
       {
         "name": "Twice baked potato, prepped",
@@ -1758,7 +1758,7 @@ globalThis.KITCHEN_MENU_MAY_2026=[
   {
     "name": "Baseball Classic",
     "category": "Classic Dinners",
-    "imageUrl": "/legacy/assets/menu/kitchen-dinner-may-2026/baseball-classic.jpg?v=kitchen-dinner-3",
+    "imageUrl": "/month-end/legacy/assets/menu/kitchen-dinner-may-2026/baseball-classic.jpg?v=kitchen-dinner-3",
     "ingredients": [
       {
         "name": "Sirloin, prepped",
@@ -1809,7 +1809,7 @@ globalThis.KITCHEN_MENU_MAY_2026=[
   {
     "name": "Filet Classic 7 + 10",
     "category": "Classic Dinners",
-    "imageUrl": "/legacy/assets/menu/kitchen-dinner-may-2026/filet-classic-7-10.jpg?v=kitchen-dinner-3",
+    "imageUrl": "/month-end/legacy/assets/menu/kitchen-dinner-may-2026/filet-classic-7-10.jpg?v=kitchen-dinner-3",
     "ingredients": [
       {
         "name": "Béarnaise, prepped, hot",
@@ -1860,7 +1860,7 @@ globalThis.KITCHEN_MENU_MAY_2026=[
   {
     "name": "New York Classic",
     "category": "Classic Dinners",
-    "imageUrl": "/legacy/assets/menu/kitchen-dinner-may-2026/new-york-classic.jpg?v=kitchen-dinner-3",
+    "imageUrl": "/month-end/legacy/assets/menu/kitchen-dinner-may-2026/new-york-classic.jpg?v=kitchen-dinner-3",
     "ingredients": [
       {
         "name": "New York, prepped",
@@ -1911,7 +1911,7 @@ globalThis.KITCHEN_MENU_MAY_2026=[
   {
     "name": "Prime Rib Classic",
     "category": "Classic Dinners",
-    "imageUrl": "/legacy/assets/menu/kitchen-dinner-may-2026/prime-rib-classic.jpg?v=kitchen-dinner-3",
+    "imageUrl": "/month-end/legacy/assets/menu/kitchen-dinner-may-2026/prime-rib-classic.jpg?v=kitchen-dinner-3",
     "ingredients": [
       {
         "name": "Prime rib , cooked",
@@ -1970,7 +1970,7 @@ globalThis.KITCHEN_MENU_MAY_2026=[
   {
     "name": "Sirloin Classic",
     "category": "Classic Dinners",
-    "imageUrl": "/legacy/assets/menu/kitchen-dinner-may-2026/sirloin-classic.jpg?v=kitchen-dinner-3",
+    "imageUrl": "/month-end/legacy/assets/menu/kitchen-dinner-may-2026/sirloin-classic.jpg?v=kitchen-dinner-3",
     "ingredients": [
       {
         "name": "Sirloin, prepped",
@@ -2021,7 +2021,7 @@ globalThis.KITCHEN_MENU_MAY_2026=[
   {
     "name": "Teriyaki Sirloin Classic",
     "category": "Classic Dinners",
-    "imageUrl": "/legacy/assets/menu/kitchen-dinner-may-2026/teriyaki-sirloin-classic.jpg?v=kitchen-dinner-3",
+    "imageUrl": "/month-end/legacy/assets/menu/kitchen-dinner-may-2026/teriyaki-sirloin-classic.jpg?v=kitchen-dinner-3",
     "ingredients": [
       {
         "name": "Teriyaki sirloin, prepped",
@@ -2072,7 +2072,7 @@ globalThis.KITCHEN_MENU_MAY_2026=[
   {
     "name": "Baseball Sirloin",
     "category": "Steaks & Prime Rib",
-    "imageUrl": "/legacy/assets/menu/kitchen-dinner-may-2026/baseball-sirloin.jpg?v=kitchen-dinner-3",
+    "imageUrl": "/month-end/legacy/assets/menu/kitchen-dinner-may-2026/baseball-sirloin.jpg?v=kitchen-dinner-3",
     "ingredients": [
       {
         "name": "Sirloin min 2\" thick, prepped",
@@ -2115,7 +2115,7 @@ globalThis.KITCHEN_MENU_MAY_2026=[
   {
     "name": "Bleu Cheese Filet",
     "category": "Steaks & Prime Rib",
-    "imageUrl": "/legacy/assets/menu/kitchen-dinner-may-2026/bleu-cheese-filet.jpg?v=kitchen-dinner-3",
+    "imageUrl": "/month-end/legacy/assets/menu/kitchen-dinner-may-2026/bleu-cheese-filet.jpg?v=kitchen-dinner-3",
     "ingredients": [
       {
         "name": "Filet, prepped",
@@ -2162,7 +2162,7 @@ globalThis.KITCHEN_MENU_MAY_2026=[
   {
     "name": "Bone-In Rib Steak",
     "category": "Steaks & Prime Rib",
-    "imageUrl": "/legacy/assets/menu/kitchen-dinner-may-2026/bone-in-rib-steak.jpg?v=kitchen-dinner-3",
+    "imageUrl": "/month-end/legacy/assets/menu/kitchen-dinner-may-2026/bone-in-rib-steak.jpg?v=kitchen-dinner-3",
     "ingredients": [
       {
         "name": "Bone–In Rib Steak, prepped",
@@ -2209,7 +2209,7 @@ globalThis.KITCHEN_MENU_MAY_2026=[
   {
     "name": "Filet 7oz + 10oz",
     "category": "Steaks & Prime Rib",
-    "imageUrl": "/legacy/assets/menu/kitchen-dinner-may-2026/filet-7oz-10oz.jpg?v=kitchen-dinner-3",
+    "imageUrl": "/month-end/legacy/assets/menu/kitchen-dinner-may-2026/filet-7oz-10oz.jpg?v=kitchen-dinner-3",
     "ingredients": [
       {
         "name": "Filet, tenderloin, prepped",
@@ -2272,7 +2272,7 @@ globalThis.KITCHEN_MENU_MAY_2026=[
   {
     "name": "New York",
     "category": "Steaks & Prime Rib",
-    "imageUrl": "/legacy/assets/menu/kitchen-dinner-may-2026/new-york.jpg?v=kitchen-dinner-3",
+    "imageUrl": "/month-end/legacy/assets/menu/kitchen-dinner-may-2026/new-york.jpg?v=kitchen-dinner-3",
     "ingredients": [
       {
         "name": "New York, striploin, prepped",
@@ -2315,7 +2315,7 @@ globalThis.KITCHEN_MENU_MAY_2026=[
   {
     "name": "Peppercorn New York",
     "category": "Steaks & Prime Rib",
-    "imageUrl": "/legacy/assets/menu/kitchen-dinner-may-2026/peppercorn-new-york.jpg?v=kitchen-dinner-3",
+    "imageUrl": "/month-end/legacy/assets/menu/kitchen-dinner-may-2026/peppercorn-new-york.jpg?v=kitchen-dinner-3",
     "ingredients": [
       {
         "name": "New York, striploin, prepped",
@@ -2362,7 +2362,7 @@ globalThis.KITCHEN_MENU_MAY_2026=[
   {
     "name": "Prime Rib",
     "category": "Steaks & Prime Rib",
-    "imageUrl": "/legacy/assets/menu/kitchen-dinner-may-2026/prime-rib.jpg?v=kitchen-dinner-3",
+    "imageUrl": "/month-end/legacy/assets/menu/kitchen-dinner-may-2026/prime-rib.jpg?v=kitchen-dinner-3",
     "ingredients": [
       {
         "name": "Prime rib , cooked",
@@ -2413,7 +2413,7 @@ globalThis.KITCHEN_MENU_MAY_2026=[
   {
     "name": "Sirloin 6oz + 8oz",
     "category": "Steaks & Prime Rib",
-    "imageUrl": "/legacy/assets/menu/kitchen-dinner-may-2026/sirloin-6oz-8oz.jpg?v=kitchen-dinner-3",
+    "imageUrl": "/month-end/legacy/assets/menu/kitchen-dinner-may-2026/sirloin-6oz-8oz.jpg?v=kitchen-dinner-3",
     "ingredients": [
       {
         "name": "Sirloin, prepped",
@@ -2468,7 +2468,7 @@ globalThis.KITCHEN_MENU_MAY_2026=[
   {
     "name": "Steak Platter",
     "category": "Steaks & Prime Rib",
-    "imageUrl": "/legacy/assets/menu/kitchen-dinner-may-2026/steak-platter.jpg?v=kitchen-dinner-3",
+    "imageUrl": "/month-end/legacy/assets/menu/kitchen-dinner-may-2026/steak-platter.jpg?v=kitchen-dinner-3",
     "ingredients": [
       {
         "name": "New York Striploin, Prepped",
@@ -2539,7 +2539,7 @@ globalThis.KITCHEN_MENU_MAY_2026=[
   {
     "name": "Teriyaki Sirloin",
     "category": "Steaks & Prime Rib",
-    "imageUrl": "/legacy/assets/menu/kitchen-dinner-may-2026/teriyaki-sirloin.jpg?v=kitchen-dinner-3",
+    "imageUrl": "/month-end/legacy/assets/menu/kitchen-dinner-may-2026/teriyaki-sirloin.jpg?v=kitchen-dinner-3",
     "ingredients": [
       {
         "name": "Teriyaki Sirloin, prepped",
@@ -2582,7 +2582,7 @@ globalThis.KITCHEN_MENU_MAY_2026=[
   {
     "name": "Sirloin Oscar 6 + 8",
     "category": "Steak & Seafood",
-    "imageUrl": "/legacy/assets/menu/kitchen-dinner-may-2026/sirloin-oscar-6-8.jpg?v=kitchen-dinner-3",
+    "imageUrl": "/month-end/legacy/assets/menu/kitchen-dinner-may-2026/sirloin-oscar-6-8.jpg?v=kitchen-dinner-3",
     "ingredients": [
       {
         "name": "Oscar combo, prepped",
@@ -2641,7 +2641,7 @@ globalThis.KITCHEN_MENU_MAY_2026=[
   {
     "name": "Steak & Snow Crab 6oz + 8oz",
     "category": "Steak & Seafood",
-    "imageUrl": "/legacy/assets/menu/kitchen-dinner-may-2026/steak-snow-crab-6oz-8oz.jpg?v=kitchen-dinner-3",
+    "imageUrl": "/month-end/legacy/assets/menu/kitchen-dinner-may-2026/steak-snow-crab-6oz-8oz.jpg?v=kitchen-dinner-3",
     "ingredients": [
       {
         "name": "Lobster tail, prepped",
@@ -2700,7 +2700,7 @@ globalThis.KITCHEN_MENU_MAY_2026=[
   {
     "name": "Steak & Lobster 6oz + 8oz",
     "category": "Steak & Seafood",
-    "imageUrl": "/legacy/assets/menu/kitchen-dinner-may-2026/steak-lobster-6oz-8oz.jpg?v=kitchen-dinner-3",
+    "imageUrl": "/month-end/legacy/assets/menu/kitchen-dinner-may-2026/steak-lobster-6oz-8oz.jpg?v=kitchen-dinner-3",
     "ingredients": [
       {
         "name": "Lobster tail, prepped",
@@ -2759,7 +2759,7 @@ globalThis.KITCHEN_MENU_MAY_2026=[
   {
     "name": "Caesar Brussels Sprouts",
     "category": "Shareable Sides",
-    "imageUrl": "/legacy/assets/menu/kitchen-dinner-may-2026/caesar-brussels-sprouts.jpg?v=kitchen-dinner-3",
+    "imageUrl": "/month-end/legacy/assets/menu/kitchen-dinner-may-2026/caesar-brussels-sprouts.jpg?v=kitchen-dinner-3",
     "ingredients": [
       {
         "name": "Brussels Sprouts, Trimmed, Halved",
@@ -2834,7 +2834,7 @@ globalThis.KITCHEN_MENU_MAY_2026=[
   {
     "name": "Keg Mac + Cheese",
     "category": "Shareable Sides",
-    "imageUrl": "/legacy/assets/menu/kitchen-dinner-may-2026/keg-mac-cheese.jpg?v=kitchen-dinner-3",
+    "imageUrl": "/month-end/legacy/assets/menu/kitchen-dinner-may-2026/keg-mac-cheese.jpg?v=kitchen-dinner-3",
     "ingredients": [
       {
         "name": "Macaroni noodles, cooked, prepped",
@@ -2885,7 +2885,7 @@ globalThis.KITCHEN_MENU_MAY_2026=[
   {
     "name": "Truffle Fries",
     "category": "Shareable Sides",
-    "imageUrl": "/legacy/assets/menu/kitchen-dinner-may-2026/truffle-fries.jpg?v=kitchen-dinner-3",
+    "imageUrl": "/month-end/legacy/assets/menu/kitchen-dinner-may-2026/truffle-fries.jpg?v=kitchen-dinner-3",
     "ingredients": [
       {
         "name": "Keg Fries, frozen",
@@ -2940,7 +2940,7 @@ globalThis.KITCHEN_MENU_MAY_2026=[
   {
     "name": "Onion Rings",
     "category": "Shareable Sides",
-    "imageUrl": "/legacy/assets/menu/kitchen-dinner-may-2026/onion-rings.jpg?v=kitchen-dinner-3",
+    "imageUrl": "/month-end/legacy/assets/menu/kitchen-dinner-may-2026/onion-rings.jpg?v=kitchen-dinner-3",
     "ingredients": [
       {
         "name": "Onion Rings, prepped",
@@ -2983,7 +2983,7 @@ globalThis.KITCHEN_MENU_MAY_2026=[
   {
     "name": "Broccoli Gratin",
     "category": "Shareable Sides",
-    "imageUrl": "/legacy/assets/menu/kitchen-dinner-may-2026/broccoli-gratin.jpg?v=kitchen-dinner-3",
+    "imageUrl": "/month-end/legacy/assets/menu/kitchen-dinner-may-2026/broccoli-gratin.jpg?v=kitchen-dinner-3",
     "ingredients": [
       {
         "name": "Broccoli, cut into 1\" florets",
@@ -3034,7 +3034,7 @@ globalThis.KITCHEN_MENU_MAY_2026=[
   {
     "name": "Add Béarnaise to Any Steak",
     "category": "Add to Your Steak",
-    "imageUrl": "/legacy/assets/menu/kitchen-dinner-may-2026/add-bearnaise-to-any-steak.jpg?v=kitchen-dinner-3",
+    "imageUrl": "/month-end/legacy/assets/menu/kitchen-dinner-may-2026/add-bearnaise-to-any-steak.jpg?v=kitchen-dinner-3",
     "ingredients": [
       {
         "name": "Béarnaise, prepped, hot",
@@ -3069,7 +3069,7 @@ globalThis.KITCHEN_MENU_MAY_2026=[
   {
     "name": "Add Blue Cheese Crust to Any Steak",
     "category": "Add to Your Steak",
-    "imageUrl": "/legacy/assets/menu/kitchen-dinner-may-2026/add-blue-cheese-crust-to-any-steak.jpg?v=kitchen-dinner-3",
+    "imageUrl": "/month-end/legacy/assets/menu/kitchen-dinner-may-2026/add-blue-cheese-crust-to-any-steak.jpg?v=kitchen-dinner-3",
     "ingredients": [
       {
         "name": "Blue cheese crust, prepped, held cold",
@@ -3108,7 +3108,7 @@ globalThis.KITCHEN_MENU_MAY_2026=[
   {
     "name": "Add Confit Garlic Butter to Any Steak",
     "category": "Add to Your Steak",
-    "imageUrl": "/legacy/assets/menu/kitchen-dinner-may-2026/add-confit-garlic-butter-to-any-steak.jpg?v=kitchen-dinner-3",
+    "imageUrl": "/month-end/legacy/assets/menu/kitchen-dinner-may-2026/add-confit-garlic-butter-to-any-steak.jpg?v=kitchen-dinner-3",
     "ingredients": [
       {
         "name": "Confit Garlic Butter",
@@ -3143,7 +3143,7 @@ globalThis.KITCHEN_MENU_MAY_2026=[
   {
     "name": "Add Lobster Tail to Any Steak",
     "category": "Add to Your Steak",
-    "imageUrl": "/legacy/assets/menu/kitchen-dinner-may-2026/add-lobster-tail-to-any-steak.jpg?v=kitchen-dinner-3",
+    "imageUrl": "/month-end/legacy/assets/menu/kitchen-dinner-may-2026/add-lobster-tail-to-any-steak.jpg?v=kitchen-dinner-3",
     "ingredients": [
       {
         "name": "Creamy butter, prepped, hot",
@@ -3190,7 +3190,7 @@ globalThis.KITCHEN_MENU_MAY_2026=[
   {
     "name": "Add Shrimp Skewer to Any Steak",
     "category": "Add to Your Steak",
-    "imageUrl": "/legacy/assets/menu/kitchen-dinner-may-2026/add-shrimp-skewer-to-any-steak.jpg?v=kitchen-dinner-3",
+    "imageUrl": "/month-end/legacy/assets/menu/kitchen-dinner-may-2026/add-shrimp-skewer-to-any-steak.jpg?v=kitchen-dinner-3",
     "ingredients": [
       {
         "name": "Shrimp skewer, prepped",
@@ -3233,7 +3233,7 @@ globalThis.KITCHEN_MENU_MAY_2026=[
   {
     "name": "Add Whiskey Peppercorn to Any Steak",
     "category": "Add to Your Steak",
-    "imageUrl": "/legacy/assets/menu/kitchen-dinner-may-2026/add-whiskey-peppercorn-to-any-steak.jpg?v=kitchen-dinner-3",
+    "imageUrl": "/month-end/legacy/assets/menu/kitchen-dinner-may-2026/add-whiskey-peppercorn-to-any-steak.jpg?v=kitchen-dinner-3",
     "ingredients": [
       {
         "name": "Whiskey peppercorn sauce, hot",
@@ -3276,7 +3276,7 @@ globalThis.KITCHEN_MENU_MAY_2026=[
   {
     "name": "Honey Mustard Salmon",
     "category": "Fish",
-    "imageUrl": "/legacy/assets/menu/kitchen-dinner-may-2026/honey-mustard-salmon.jpg?v=kitchen-dinner-3",
+    "imageUrl": "/month-end/legacy/assets/menu/kitchen-dinner-may-2026/honey-mustard-salmon.jpg?v=kitchen-dinner-3",
     "ingredients": [
       {
         "name": "Salmon, thawed, prepped",
@@ -3339,7 +3339,7 @@ globalThis.KITCHEN_MENU_MAY_2026=[
   {
     "name": "Pistachio Salmon",
     "category": "Fish",
-    "imageUrl": "/legacy/assets/menu/kitchen-dinner-may-2026/pistachio-salmon.jpg?v=kitchen-dinner-3",
+    "imageUrl": "/month-end/legacy/assets/menu/kitchen-dinner-may-2026/pistachio-salmon.jpg?v=kitchen-dinner-3",
     "ingredients": [
       {
         "name": "Salmon, thawed, prepped",
@@ -3410,7 +3410,7 @@ globalThis.KITCHEN_MENU_MAY_2026=[
   {
     "name": "Two Tail Dinner",
     "category": "Fish",
-    "imageUrl": "/legacy/assets/menu/kitchen-dinner-may-2026/two-tail-dinner.jpg?v=kitchen-dinner-3",
+    "imageUrl": "/month-end/legacy/assets/menu/kitchen-dinner-may-2026/two-tail-dinner.jpg?v=kitchen-dinner-3",
     "ingredients": [
       {
         "name": "Lobster Tails, Prepped",
@@ -3469,7 +3469,7 @@ globalThis.KITCHEN_MENU_MAY_2026=[
   {
     "name": "Blackened Chicken",
     "category": "Chicken",
-    "imageUrl": "/legacy/assets/menu/kitchen-dinner-may-2026/blackened-chicken.jpg?v=kitchen-dinner-3",
+    "imageUrl": "/month-end/legacy/assets/menu/kitchen-dinner-may-2026/blackened-chicken.jpg?v=kitchen-dinner-3",
     "ingredients": [
       {
         "name": "Chicken breast, RAW",
@@ -3528,7 +3528,7 @@ globalThis.KITCHEN_MENU_MAY_2026=[
   {
     "name": "Mushroom and Truffle Chicken",
     "category": "Chicken",
-    "imageUrl": "/legacy/assets/menu/kitchen-dinner-may-2026/mushroom-and-truffle-chicken.jpg?v=kitchen-dinner-3",
+    "imageUrl": "/month-end/legacy/assets/menu/kitchen-dinner-may-2026/mushroom-and-truffle-chicken.jpg?v=kitchen-dinner-3",
     "ingredients": [
       {
         "name": "Chicken Breast, raw",
@@ -3591,7 +3591,7 @@ globalThis.KITCHEN_MENU_MAY_2026=[
   {
     "name": "Hot Creamy Butter",
     "category": "Add-ons",
-    "imageUrl": "/legacy/assets/menu/kitchen-dinner-may-2026/hot-creamy-butter.jpg?v=kitchen-dinner-3",
+    "imageUrl": "/month-end/legacy/assets/menu/kitchen-dinner-may-2026/hot-creamy-butter.jpg?v=kitchen-dinner-3",
     "ingredients": [
       {
         "name": "Creamy butter, prepped, hot",
@@ -3626,7 +3626,7 @@ globalThis.KITCHEN_MENU_MAY_2026=[
   {
     "name": "Warm Bread",
     "category": "Add-ons",
-    "imageUrl": "/legacy/assets/menu/kitchen-dinner-may-2026/warm-bread.jpg?v=kitchen-dinner-3",
+    "imageUrl": "/month-end/legacy/assets/menu/kitchen-dinner-may-2026/warm-bread.jpg?v=kitchen-dinner-3",
     "ingredients": [
       {
         "name": "Bread",
@@ -3665,7 +3665,7 @@ globalThis.KITCHEN_MENU_MAY_2026=[
   {
     "name": "Garnish Summary",
     "category": "Garnish & Plating",
-    "imageUrl": "/legacy/assets/menu/kitchen-dinner-may-2026/garnish-summary.jpg?v=kitchen-dinner-3",
+    "imageUrl": "/month-end/legacy/assets/menu/kitchen-dinner-may-2026/garnish-summary.jpg?v=kitchen-dinner-3",
     "ingredients": [],
     "productKnowledge": "",
     "cookTime": "",
@@ -3695,7 +3695,7 @@ globalThis.KITCHEN_MENU_MAY_2026=[
   {
     "name": "Sautéed Mixed Mushrooms",
     "category": "Garnish & Plating",
-    "imageUrl": "/legacy/assets/menu/kitchen-dinner-may-2026/sauteed-mixed-mushrooms.jpg?v=kitchen-dinner-3",
+    "imageUrl": "/month-end/legacy/assets/menu/kitchen-dinner-may-2026/sauteed-mixed-mushrooms.jpg?v=kitchen-dinner-3",
     "ingredients": [
       {
         "name": "Mixed mushrooms, washed",
@@ -3738,7 +3738,7 @@ globalThis.KITCHEN_MENU_MAY_2026=[
   {
     "name": "Plate Vegetables",
     "category": "Garnish & Plating",
-    "imageUrl": "/legacy/assets/menu/kitchen-dinner-may-2026/plate-vegetables.jpg?v=kitchen-dinner-3",
+    "imageUrl": "/month-end/legacy/assets/menu/kitchen-dinner-may-2026/plate-vegetables.jpg?v=kitchen-dinner-3",
     "ingredients": [],
     "productKnowledge": "seasonal offering of fresh vegetables to be plated alongside all steaks. he plate vegetables will change during the year, please ask your Culinary anager about our current offering. Cook times, portion sizes, and plating will vary with different offerings",
     "cookTime": "",
@@ -3768,7 +3768,7 @@ globalThis.KITCHEN_MENU_MAY_2026=[
   {
     "name": "Billy Miner Pie",
     "category": "Desserts",
-    "imageUrl": "/legacy/assets/menu/kitchen-dinner-may-2026/billy-miner-pie.jpg?v=kitchen-dinner-3",
+    "imageUrl": "/month-end/legacy/assets/menu/kitchen-dinner-may-2026/billy-miner-pie.jpg?v=kitchen-dinner-3",
     "ingredients": [
       {
         "name": "Billy Miner pie",
@@ -3815,7 +3815,7 @@ globalThis.KITCHEN_MENU_MAY_2026=[
   {
     "name": "Cheesecake",
     "category": "Desserts",
-    "imageUrl": "/legacy/assets/menu/kitchen-dinner-may-2026/cheesecake.jpg?v=kitchen-dinner-3",
+    "imageUrl": "/month-end/legacy/assets/menu/kitchen-dinner-may-2026/cheesecake.jpg?v=kitchen-dinner-3",
     "ingredients": [
       {
         "name": "Cheesecake, thawed",
@@ -3854,7 +3854,7 @@ globalThis.KITCHEN_MENU_MAY_2026=[
   {
     "name": "Crème Brule",
     "category": "Desserts",
-    "imageUrl": "/legacy/assets/menu/kitchen-dinner-may-2026/creme-brule.jpg?v=kitchen-dinner-3",
+    "imageUrl": "/month-end/legacy/assets/menu/kitchen-dinner-may-2026/creme-brule.jpg?v=kitchen-dinner-3",
     "ingredients": [
       {
         "name": "Crème Brulée, prepped",
@@ -3901,7 +3901,7 @@ globalThis.KITCHEN_MENU_MAY_2026=[
   {
     "name": "Dessert Platter",
     "category": "Desserts",
-    "imageUrl": "/legacy/assets/menu/kitchen-dinner-may-2026/dessert-platter.jpg?v=kitchen-dinner-3",
+    "imageUrl": "/month-end/legacy/assets/menu/kitchen-dinner-may-2026/dessert-platter.jpg?v=kitchen-dinner-3",
     "ingredients": [
       {
         "name": "Cheesecake, thawed",
@@ -3972,7 +3972,7 @@ globalThis.KITCHEN_MENU_MAY_2026=[
   {
     "name": "Seasonal Sorbet",
     "category": "Desserts",
-    "imageUrl": "/legacy/assets/menu/kitchen-dinner-may-2026/seasonal-sorbet.jpg?v=kitchen-dinner-3",
+    "imageUrl": "/month-end/legacy/assets/menu/kitchen-dinner-may-2026/seasonal-sorbet.jpg?v=kitchen-dinner-3",
     "ingredients": [
       {
         "name": "Chocolate Sorbet",
@@ -4011,7 +4011,7 @@ globalThis.KITCHEN_MENU_MAY_2026=[
   {
     "name": "Kids Burger",
     "category": "Kids Menu",
-    "imageUrl": "/legacy/assets/menu/kitchen-dinner-may-2026/kids-burger.jpg?v=kitchen-dinner-3",
+    "imageUrl": "/month-end/legacy/assets/menu/kitchen-dinner-may-2026/kids-burger.jpg?v=kitchen-dinner-3",
     "ingredients": [
       {
         "name": "Keg Burger Bun",
@@ -4078,7 +4078,7 @@ globalThis.KITCHEN_MENU_MAY_2026=[
   {
     "name": "Kids Chicken Strips",
     "category": "Kids Menu",
-    "imageUrl": "/legacy/assets/menu/kitchen-dinner-may-2026/kids-chicken-strips.jpg?v=kitchen-dinner-3",
+    "imageUrl": "/month-end/legacy/assets/menu/kitchen-dinner-may-2026/kids-chicken-strips.jpg?v=kitchen-dinner-3",
     "ingredients": [
       {
         "name": "Chicken strips",
@@ -4129,7 +4129,7 @@ globalThis.KITCHEN_MENU_MAY_2026=[
   {
     "name": "Kids Creamy Pasta",
     "category": "Kids Menu",
-    "imageUrl": "/legacy/assets/menu/kitchen-dinner-may-2026/kids-creamy-pasta.jpg?v=kitchen-dinner-3",
+    "imageUrl": "/month-end/legacy/assets/menu/kitchen-dinner-may-2026/kids-creamy-pasta.jpg?v=kitchen-dinner-3",
     "ingredients": [
       {
         "name": "Macaroni, cooked",
@@ -4172,7 +4172,7 @@ globalThis.KITCHEN_MENU_MAY_2026=[
   {
     "name": "Kids Ice Cream",
     "category": "Kids Menu",
-    "imageUrl": "/legacy/assets/menu/kitchen-dinner-may-2026/kids-ice-cream.jpg?v=kitchen-dinner-3",
+    "imageUrl": "/month-end/legacy/assets/menu/kitchen-dinner-may-2026/kids-ice-cream.jpg?v=kitchen-dinner-3",
     "ingredients": [
       {
         "name": "Vanilla & Chocolate swirl ice cream",
@@ -4215,7 +4215,7 @@ globalThis.KITCHEN_MENU_MAY_2026=[
   {
     "name": "Kids Plate",
     "category": "Kids Menu",
-    "imageUrl": "/legacy/assets/menu/kitchen-dinner-may-2026/kids-plate.jpg?v=kitchen-dinner-3",
+    "imageUrl": "/month-end/legacy/assets/menu/kitchen-dinner-may-2026/kids-plate.jpg?v=kitchen-dinner-3",
     "ingredients": [
       {
         "name": "Soda crackers",
@@ -4266,7 +4266,7 @@ globalThis.KITCHEN_MENU_MAY_2026=[
   {
     "name": "Kids Sirloin",
     "category": "Kids Menu",
-    "imageUrl": "/legacy/assets/menu/kitchen-dinner-may-2026/kids-sirloin.jpg?v=kitchen-dinner-3",
+    "imageUrl": "/month-end/legacy/assets/menu/kitchen-dinner-may-2026/kids-sirloin.jpg?v=kitchen-dinner-3",
     "ingredients": [
       {
         "name": "Sirloin, prepped",

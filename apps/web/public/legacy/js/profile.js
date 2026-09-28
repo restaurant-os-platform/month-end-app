@@ -224,7 +224,7 @@
     target.details=normalizeDetails({...target.details,avatarDataUrl:''});save();renderProfilePage();toast('Profile photo removed.');
   }
 
-  function openUsersAndAccess(){closeAllMenus();window.top.location.href='/app/people';}
+  function openUsersAndAccess(){closeAllMenus();window.top.location.href='/month-end/app/people';}
   function scrollProfileSection(id,button){
     document.getElementById(id)?.scrollIntoView({behavior:'smooth',block:'start'});
     document.querySelectorAll('.profile-section-nav button').forEach(item=>item.classList.toggle('active',item===button));

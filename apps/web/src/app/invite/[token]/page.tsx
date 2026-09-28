@@ -16,7 +16,7 @@ type InvitePageProps = {
 
 const errors: Record<string, string> = {
   invalid_invitation: "This invitation is no longer available.",
-  weak_password: "Use at least 12 characters, including uppercase, lowercase, and a number.",
+  weak_password: "Use at least 6 characters, including a lowercase letter and a number.",
   password_mismatch: "The two passwords do not match.",
   account_failed: "An account already exists for this email, or signup could not be completed. Sign in and return to this invitation.",
   accept_failed: "This invitation does not match the signed-in account.",
@@ -52,8 +52,8 @@ export default async function InvitePage({ params, searchParams }: InvitePagePro
           {query.error ? <div className="form-alert" role="alert">{errors[query.error]}</div> : null}
           <form action={finishEmailedInvitation} className="auth-form">
             <input name="token" type="hidden" value={token} />
-            <label><span>Choose a password</span><input name="password" type="password" autoComplete="new-password" minLength={12} required /><small>At least 12 characters with uppercase, lowercase, and a number.</small></label>
-            <label><span>Confirm password</span><input name="passwordConfirmation" type="password" autoComplete="new-password" minLength={12} required /></label>
+            <label><span>Choose a password</span><input name="password" type="password" autoComplete="new-password" minLength={6} required /><small>At least 6 characters, including a lowercase letter and a number.</small></label>
+            <label><span>Confirm password</span><input name="passwordConfirmation" type="password" autoComplete="new-password" minLength={6} required /></label>
             <button type="submit">Set password and join</button>
           </form>
         </> : signedIn ? <>

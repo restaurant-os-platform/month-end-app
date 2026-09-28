@@ -38,7 +38,7 @@ function setTheme(theme,savePreference=true){
     const background=getComputedStyle(document.documentElement).getPropertyValue('--bg').trim();
     if(background)document.querySelector('meta[name="theme-color"]')?.setAttribute('content',background);
   });
-  if(savePreference&&window.serverAccessContext){fetch('/api/user-preferences',{method:'PUT',credentials:'include',headers:{'Content-Type':'application/json'},body:JSON.stringify({theme:nextTheme})}).catch(()=>{});}
+  if(savePreference&&window.serverAccessContext){fetch('/month-end/api/user-preferences',{method:'PUT',credentials:'include',headers:{'Content-Type':'application/json'},body:JSON.stringify({theme:nextTheme})}).catch(()=>{});}
 }
 
 function syncEmbeddedTheme(theme=document.documentElement.dataset.theme||'slate'){
@@ -78,7 +78,7 @@ function setSettingsSidebarCollapsed(collapsed,savePreference=true){
   const button=app.querySelector('.settings-sidebar-toggle');
   if(button){button.setAttribute('aria-label',next?'Expand settings navigation':'Collapse settings navigation');button.title=next?'Expand settings navigation':'Collapse settings navigation';}
   try{localStorage.setItem('month_end_settings_sidebar_collapsed',String(next));}catch(e){}
-  if(savePreference&&window.serverAccessContext)fetch('/api/user-preferences',{method:'PUT',credentials:'include',headers:{'Content-Type':'application/json'},body:JSON.stringify({settingsSidebarCollapsed:next})}).catch(()=>{});
+  if(savePreference&&window.serverAccessContext)fetch('/month-end/api/user-preferences',{method:'PUT',credentials:'include',headers:{'Content-Type':'application/json'},body:JSON.stringify({settingsSidebarCollapsed:next})}).catch(()=>{});
 }
 function toggleSettingsSidebar(){
   const app=document.getElementById('settings-app');
@@ -409,7 +409,7 @@ function inviteEmailBody(profile){
 async function sendProfileInvite(profile){
   const payload={to:profile.email,name:profile.name,role:profile.role,inviteUrl:profileInviteUrl(profile),body:inviteEmailBody(profile)};
   try{
-    const response=await fetch('/api/invite-manager',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
+    const response=await fetch('/month-end/api/invite-manager',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
     const data=await response.json().catch(()=>({}));
     if(response.ok&&data.sent)return true;
   }catch(e){}
@@ -554,7 +554,7 @@ function setSettingsSection(section){
     return;
   }
   if(section==='profiles'){
-    window.top.location.href='/app/people';
+    window.top.location.href='/month-end/app/people';
     return;
   }
   if(section!=='profiles'&&!profileCanAccessPage(currentProfile(),'settings')){

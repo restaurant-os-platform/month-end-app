@@ -49,7 +49,7 @@ export async function finishEmailedInvitation(formData: FormData) {
   if (!invitation || invitation.status !== "pending" || invitation.email.toLowerCase() !== signedInEmail) {
     redirect(`/invite/${token}?error=accept_failed&ready=1`);
   }
-  if (password.length < 12 || !/[a-z]/.test(password) || !/[A-Z]/.test(password) || !/[0-9]/.test(password)) {
+  if (password.length < 6 || !/[a-z]/.test(password) || !/[0-9]/.test(password)) {
     redirect(`/invite/${token}?error=weak_password&ready=1`);
   }
   if (password !== passwordConfirmation) redirect(`/invite/${token}?error=password_mismatch&ready=1`);

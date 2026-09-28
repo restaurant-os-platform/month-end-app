@@ -304,7 +304,7 @@ async function cloudDeleteCount(countId){
 async function cloudLoadCountRoomLocks(countId){
   try{
     if(localOnlyMode)return[];
-    const response=await fetch(`/api/count-room-locks?countId=${encodeURIComponent(countId)}`,{credentials:'same-origin',cache:'no-store'});
+    const response=await fetch(`/month-end/api/count-room-locks?countId=${encodeURIComponent(countId)}`,{credentials:'same-origin',cache:'no-store'});
     const payload=await response.json().catch(()=>({}));
     if(!response.ok)throw new Error(payload.error||`HTTP ${response.status}`);
     return Array.isArray(payload.locks)?payload.locks:[];
@@ -317,7 +317,7 @@ async function cloudLoadCountRoomLocks(countId){
 async function cloudAcquireCountRoom(countId,roomId){
   try{
     if(localOnlyMode)return{acquired:true,lock:{countId,roomId,mine:true,holderName:'Local session'}};
-    const response=await fetch('/api/count-room-locks',{
+    const response=await fetch('/month-end/api/count-room-locks',{
       method:'POST',credentials:'same-origin',headers:{'Content-Type':'application/json'},body:JSON.stringify({countId,roomId})
     });
     const payload=await response.json().catch(()=>({}));
@@ -333,7 +333,7 @@ async function cloudAcquireCountRoom(countId,roomId){
 async function cloudReleaseCountRoom(countId,roomId,keepalive=false){
   try{
     if(localOnlyMode)return true;
-    const response=await fetch('/api/count-room-locks',{
+    const response=await fetch('/month-end/api/count-room-locks',{
       method:'DELETE',credentials:'same-origin',keepalive,headers:{'Content-Type':'application/json'},body:JSON.stringify({countId,roomId})
     });
     return response.ok;

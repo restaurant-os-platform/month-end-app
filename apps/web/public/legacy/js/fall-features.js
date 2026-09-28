@@ -17,7 +17,7 @@ function ensureFallFeaturesMenu(workspace){
     departmentIds:(workspace.departments||[]).filter(d=>!d.archived).map(d=>d.id),
     description:shared?.description||'September 2026 food and cocktail features, recipes, and take-home instructions.',
     sourceFile:[...new Set(sources.flatMap(m=>String(m.sourceFile||'').split(';').map(s=>s.trim()).filter(Boolean)))].join('; '),
-    items:[...items.values()].map(item=>({...item,imageUrl:item.imageUrl|| (photos[item.id]?'/legacy/assets/menu/fall-features-2026/'+photos[item.id]:'' )}))};
+    items:[...items.values()].map(item=>({...item,imageUrl:item.imageUrl|| (photos[item.id]?'/month-end/legacy/assets/menu/fall-features-2026/'+photos[item.id]:'' )}))};
   const next=[];let inserted=false;
   menus.forEach(menu=>{if(!ids.has(menu.id))next.push(menu);else if(!inserted){next.push(combined);inserted=true;}});
   if(JSON.stringify(next)===JSON.stringify(menus))return false;

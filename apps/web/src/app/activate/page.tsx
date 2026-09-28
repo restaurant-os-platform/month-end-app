@@ -10,7 +10,7 @@ export const dynamic = "force-dynamic";
 
 const errors: Record<string, string> = {
   invalid_link: "This activation link is not valid.",
-  weak_password: "Use at least 12 characters, including uppercase, lowercase, and a number.",
+  weak_password: "Use at least 6 characters, including a lowercase letter and a number.",
   password_mismatch: "The two passwords do not match.",
   setup_unavailable: "Owner setup is temporarily unavailable.",
   activation_failed: "We could not start activation. Please try again.",
@@ -65,12 +65,12 @@ export default async function ActivatePage({ searchParams }: ActivatePageProps) 
               </label>
               <label>
                 <span>Choose a password</span>
-                <input name="password" type="password" autoComplete="new-password" minLength={12} required />
-                <small>At least 12 characters with uppercase, lowercase, and a number.</small>
+                <input name="password" type="password" autoComplete="new-password" minLength={6} required />
+                <small>At least 6 characters, including a lowercase letter and a number.</small>
               </label>
               <label>
                 <span>Confirm password</span>
-                <input name="passwordConfirmation" type="password" autoComplete="new-password" minLength={12} required />
+                <input name="passwordConfirmation" type="password" autoComplete="new-password" minLength={6} required />
               </label>
               <button type="submit">Create Owner account</button>
             </form>

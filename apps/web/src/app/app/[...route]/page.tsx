@@ -45,7 +45,7 @@ export default async function WorkspacePage({ params }: WorkspacePageProps) {
         organizationName={context.organizationName}
         title={workspaceRoute.title}
       />
-      <Script src="/legacy/js/search-bridge.js" strategy="afterInteractive" />
+      <Script src="/month-end/legacy/js/search-bridge.js" strategy="afterInteractive" />
     </>
   );
 }

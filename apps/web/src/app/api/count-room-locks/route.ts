@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
 
-import { can, getAccessContext } from "@/lib/auth/context";
-import { createClient } from "@/lib/supabase/server";
+import { getCountRoomContext } from "@/lib/auth/context";
 
 export const dynamic = "force-dynamic";
 
@@ -21,12 +20,12 @@ function cleanId(value: unknown) {
 }
 
 async function requestContext() {
-  const context = await getAccessContext();
+  const context = await getCountRoomContext();
   if (!context) return { error: response({ error: "No active workspace" }, 403) } as const;
-  if (!can(context, "counts.create")) {
+  if (!context.canCount) {
     return { error: response({ error: "You do not have permission to work on counts" }, 403) } as const;
   }
-  return { context, supabase: await createClient() } as const;
+  return { context, supabase: context.supabase } as const;
 }
 
 export async function GET(request: Request) {

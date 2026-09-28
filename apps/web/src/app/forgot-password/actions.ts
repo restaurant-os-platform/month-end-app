@@ -2,7 +2,7 @@
 
 import { redirect } from "next/navigation";
 
-import { createClient } from "@/lib/supabase/server";
+import { createRecoveryClient } from "@/lib/supabase/server";
 import { getPublicAppUrl } from "@/lib/auth/public-url";
 
 export async function requestPasswordReset(formData: FormData) {
@@ -10,9 +10,10 @@ export async function requestPasswordReset(formData: FormData) {
   if (!email || !email.includes("@")) redirect("/forgot-password?error=invalid_email");
 
   const appUrl = getPublicAppUrl();
-  const supabase = await createClient();
-  await supabase.auth.resetPasswordForEmail(email, {
+  const supabase = await createRecoveryClient();
+  const { error } = await supabase.auth.resetPasswordForEmail(email, {
     redirectTo: `${appUrl}/auth/callback?next=/reset-password`,
   });
+  if (error) redirect("/forgot-password?error=send_failed");
   redirect("/forgot-password?sent=1");
 }

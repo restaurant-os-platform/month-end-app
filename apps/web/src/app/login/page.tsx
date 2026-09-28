@@ -1,9 +1,12 @@
+import { modulePath } from "@/lib/module-path";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 
 import { createClient } from "@/lib/supabase/server";
 import { login } from "./actions";
+import { sharedLoginEnabled } from "@/lib/restaurant-os/config";
+import { safeNext } from "@/lib/restaurant-os/policy";
 
 export const metadata: Metadata = { title: "Sign in" };
 export const dynamic = "force-dynamic";
@@ -21,9 +24,14 @@ type LoginPageProps = {
 };
 
 export default async function LoginPage({ searchParams }: LoginPageProps) {
+  const params = await searchParams;
+  if (sharedLoginEnabled()) {
+    const target = `/auth/restaurant-os/start?next=${encodeURIComponent(safeNext(params.next, "/app"))}`;
+    if (!params.error) redirect(target);
+    return <main className="setup-page"><section className="setup-card"><h1>Unable to open Month End</h1><p role="alert">Your account could not be connected to an active workspace. Your administrator can check the connection and your access.</p><a href={modulePath(target)}>Try signing in again</a></section></main>;
+  }
   const supabase = await createClient();
   const { data } = await supabase.auth.getClaims();
-  const params = await searchParams;
   if (data?.claims) redirect("/choose-workspace");
   const errorMessage = params.error ? errors[params.error] : null;
   const next = params.next?.startsWith("/") && !params.next.startsWith("//") ? params.next : "/app";

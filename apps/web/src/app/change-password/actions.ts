@@ -9,7 +9,7 @@ export async function completePasswordSetup(formData: FormData) {
   const context = await requireAccessContext({ allowPasswordChange: true });
   const password = String(formData.get("password") ?? "");
   const confirmation = String(formData.get("passwordConfirmation") ?? "");
-  if (password.length < 12 || !/[a-z]/.test(password) || !/[A-Z]/.test(password) || !/[0-9]/.test(password)) redirect("/change-password?error=weak_password");
+  if (password.length < 6 || !/[a-z]/.test(password) || !/[0-9]/.test(password)) redirect("/change-password?error=weak_password");
   if (password !== confirmation) redirect("/change-password?error=password_mismatch");
 
   const supabase = await createClient();

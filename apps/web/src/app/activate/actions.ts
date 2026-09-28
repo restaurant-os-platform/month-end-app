@@ -27,9 +27,9 @@ export async function activateOwner(formData: FormData) {
 
   if (
     typeof password !== "string"
-    || password.length < 12
+    || password.length < 6
     || !/[a-z]/.test(password)
-    || !/[A-Z]/.test(password)
+
     || !/[0-9]/.test(password)
   ) {
     redirect(`/activate?token=${encodeURIComponent(token)}&error=weak_password`);

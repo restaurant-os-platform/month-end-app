@@ -3,19 +3,17 @@
 import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
 
+import { sharedLoginEnabled } from "@/lib/restaurant-os/config";
+import { safeNext } from "@/lib/restaurant-os/policy";
+
 import { WORKSPACE_COOKIE } from "@/lib/auth/context";
 import { createClient } from "@/lib/supabase/server";
-
-function safeNext(value: FormDataEntryValue | null) {
-  return typeof value === "string" && value.startsWith("/") && !value.startsWith("//")
-    ? value
-    : "/app";
-}
 
 export async function login(formData: FormData) {
   const email = formData.get("email");
   const password = formData.get("password");
-  const next = safeNext(formData.get("next"));
+  const next = safeNext(formData.get("next"), "/app");
+  if (sharedLoginEnabled()) redirect(`/auth/restaurant-os/start?next=${encodeURIComponent(next)}`);
 
   if (typeof email !== "string" || typeof password !== "string") {
     redirect("/login?error=invalid_form");
@@ -58,7 +56,7 @@ export async function login(formData: FormData) {
     httpOnly: true,
     sameSite: "lax",
     secure: process.env.NODE_ENV === "production",
-    path: "/",
+    path: "/month-end",
     maxAge: 60 * 60 * 24 * 365,
   });
 

@@ -18,7 +18,7 @@ export function InviteSessionBridge() {
     }).then(({ error }) => {
       const cleanUrl = `${window.location.pathname}${window.location.search}`;
       window.history.replaceState({}, "", cleanUrl);
-      window.location.replace(error ? "/login?error=confirmation_failed" : cleanUrl);
+      window.location.replace(error ? "/month-end/login?error=confirmation_failed" : cleanUrl);
     });
   }, []);
 

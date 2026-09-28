@@ -8,7 +8,7 @@ let browserClient: ReturnType<typeof createBrowserClient<Database>> | null = nul
 export function createClient() {
   if (!browserClient) {
     const { url, publishableKey } = getSupabaseEnv();
-    browserClient = createBrowserClient<Database>(url, publishableKey);
+    browserClient = createBrowserClient<Database>(url, publishableKey, { cookieOptions: { path: "/month-end" } });
   }
 
   return browserClient;

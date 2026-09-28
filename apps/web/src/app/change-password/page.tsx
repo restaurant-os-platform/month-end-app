@@ -8,7 +8,7 @@ export const metadata: Metadata = { title: "Set your password" };
 export const dynamic = "force-dynamic";
 
 const errors: Record<string, string> = {
-  weak_password: "Use at least 12 characters with uppercase, lowercase, and a number.",
+  weak_password: "Use at least 6 characters, including a lowercase letter and a number.",
   password_mismatch: "The passwords do not match.",
   update_failed: "Your password could not be updated. Please try again.",
 };
@@ -24,8 +24,8 @@ export default async function ChangePasswordPage({ searchParams }: { searchParam
     <p>{context.displayName}, replace the temporary password before opening {context.organizationName}.</p>
     {params.error ? <div className="form-alert" role="alert">{errors[params.error] ?? errors.update_failed}</div> : null}
     <form action={completePasswordSetup} className="auth-form">
-      <label><span>New password</span><input name="password" type="password" autoComplete="new-password" minLength={12} required /></label>
-      <label><span>Confirm password</span><input name="passwordConfirmation" type="password" autoComplete="new-password" minLength={12} required /></label>
+      <label><span>New password</span><input name="password" type="password" autoComplete="new-password" minLength={6} required /></label>
+      <label><span>Confirm password</span><input name="passwordConfirmation" type="password" autoComplete="new-password" minLength={6} required /></label>
       <button type="submit">Save password and continue</button>
     </form>
   </section></main>;

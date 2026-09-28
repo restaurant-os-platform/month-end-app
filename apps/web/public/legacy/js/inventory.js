@@ -388,17 +388,18 @@ function normalizeInventoryRooms(inv){
   if(!Array.isArray(inv.rooms)||!inv.rooms.length){
     inv.rooms=[{id:uid(),name:inv.roomName||'Main Room',items:{...(inv.items||{})}}];
   }
+  normalizeFloorPlanRooms();
+  const activeProductIds=new Set(state.products.filter(product=>!product.archived).map(product=>product.id));
   // Preserve each room object. The count editor keeps a reference to the
   // active room while it reads the visible inputs; replacing the objects here
   // would send those edits into a detached object instead of the inventory.
   inv.rooms=inv.rooms.map((entry,index)=>{
     const room=entry&&typeof entry==='object'?entry:{};
-    const floorRoom=floorPlanRoomById(room.roomId)||ensureFloorPlanRoom(room.name||`Room ${index+1}`,room.roomId);
+    const floorRoom=state.rooms.find(item=>item.id===room.roomId)||ensureFloorPlanRoom(room.name||`Room ${index+1}`,room.roomId);
     room.id=room.id||uid();
     room.roomId=floorRoom.id;
     room.name=floorRoom.name;
     if(!room.items||typeof room.items!=='object')room.items={};
-    const activeProductIds=new Set(state.products.filter(product=>!product.archived).map(product=>product.id));
     room.extraProductIds=[...new Set(Array.isArray(room.extraProductIds)?room.extraProductIds:[])].filter(id=>activeProductIds.has(id));
     return room;
   });
@@ -426,10 +427,12 @@ function mergeInventoryRoomItems(rooms){
 }
 function currentInventoryRoom(){
   const ex=currentInvEdit?state.inventories.find(i=>i.id===currentInvEdit):null;
-  if(ex)normalizeInventoryRooms(ex);
+  // The editor normalizes on entry. Reading a room must not rebuild all rooms
+  // and merge every saved count for each product rendered.
+  if(ex&&(!Array.isArray(ex.rooms)||!ex.rooms.length))normalizeInventoryRooms(ex);
   const rooms=ex?.rooms||currentInvRooms;
   let room=rooms.find(r=>r.id===currentInvRoomId)||rooms[0];
-  currentInvRoomId=room.id;
+  if(room)currentInvRoomId=room.id;
   return room;
 }
 function inventoryRoomItemsEqual(a={},b={}){
@@ -991,8 +994,8 @@ function initLiveCounts(ex,selectedRoomId=null){
   currentInvRoomId=currentInvRooms[0].id;
   currentRoomProducts().forEach(p=>{liveInvCounts[p.id]='';});
 }
-function inventorySectionProgress(category,subcategory){
-  const items=currentCountProducts().filter(product=>{const group=countProductDisplayGroup(product);return group.category===category&&group.subcategory===subcategory;});
+function inventorySectionProgress(category,subcategory,products=currentCountProducts(),room=currentInventoryRoom()){
+  const items=products.filter(product=>{const group=countProductDisplayGroup(product,room);return group.category===category&&group.subcategory===subcategory;});
   const filled=items.filter(product=>{const value=liveInvCounts[product.id];return value!==''&&value!==null&&value!==undefined;}).length;
   return{filled,total:items.length,complete:items.length>0&&filled===items.length};
 }
@@ -1141,6 +1144,7 @@ async function createCountDraft(date,label,floorRooms=activeFloorPlanRooms()){
   return shared.draft;
 }
 
+let countRoomOpening=null;
 function countRoomLockFor(roomId){return countRoomPickerLocks.find(lock=>lock.roomId===roomId)||null;}
 function renderCountRoomPicker(){
   const list=document.getElementById('count-room-picker-list');
@@ -1152,13 +1156,15 @@ function renderCountRoomPicker(){
   const finaliseButton=document.getElementById('count-picker-finalise');
   if(finaliseButton){finaliseButton.disabled=!Object.keys(inv.items||{}).length;finaliseButton.textContent=`Finalise ${inv.recordType==='recount'?'Re-count':'Count'}`;}
   const accessible=inv.rooms.filter(room=>typeof profileCanAccessRoom!=='function'||profileCanAccessRoom(currentProfile(),room.roomId));
+  const uncountedByRoom=new Map();
+  inventoryUncountedEntries(inv).forEach(entry=>uncountedByRoom.set(entry.roomId,(uncountedByRoom.get(entry.roomId)||0)+1));
   list.innerHTML=accessible.map(room=>{
     const lock=countRoomLockFor(room.id);
     const unavailable=lock&&!lock.mine;
     const counted=Object.keys(room.items||{}).length;
-    const uncounted=inventoryUncountedEntries(inv).filter(entry=>entry.roomId===room.id).length;
+    const uncounted=uncountedByRoom.get(room.id)||0;
     const detail=unavailable?`${lock.holderName||'A team member'} is counting this room right now.`:lock?.mine?'Reserved by you. Select to continue.':`${counted} item${counted===1?'':'s'} saved · ${uncounted} uncounted · Available to count`;
-    return`<button class="count-room-picker-card ${unavailable?'is-locked':''}" type="button" ${unavailable?'disabled aria-disabled="true"':''} onclick="enterCountRoom('${room.id}')"><span class="count-room-picker-copy"><strong>${escapeHtml(room.name)}</strong><span>${escapeHtml(detail)}</span></span><em class="count-room-picker-status">${unavailable?'In use':lock?.mine?'Continue':'Open'}</em></button>`;
+    return`<button class="count-room-picker-card ${unavailable?'is-locked':''}" type="button" ${unavailable||countRoomOpening?'disabled aria-disabled="true"':''} onclick="enterCountRoom('${room.id}')"><span class="count-room-picker-copy"><strong>${escapeHtml(room.name)}</strong><span>${escapeHtml(detail)}</span></span><em class="count-room-picker-status">${countRoomOpening?.roomId===room.id?'Opening…':unavailable?'In use':lock?.mine?'Continue':'Open'}</em></button>`;
   }).join('')||'<div class="count-room-picker-loading">No rooms are available for your account.</div>';
 }
 async function refreshCountRoomPicker(){
@@ -1195,13 +1201,27 @@ function closeCountRoomPicker(){
   closeModal('modal-inv-room-picker');
 }
 async function enterCountRoom(roomId){
-  if(!countRoomPickerCountId)return;
+  if(!countRoomPickerCountId||countRoomOpening)return;
   const inv=state.inventories.find(item=>item.id===countRoomPickerCountId);
   if(inventoryIsFinalised(inv)){closeCountRoomPicker();toast('This count is finalised and can no longer be changed.',true);return;}
   const room=inv?.rooms?.find(item=>item.id===roomId);
   if(!room)return;
   if(typeof profileCanAccessRoom==='function'&&!profileCanAccessRoom(currentProfile(),room.roomId)){toast('You do not have access to that room.',true);return;}
-  const result=typeof cloudAcquireCountRoom==='function'?await cloudAcquireCountRoom(countRoomPickerCountId,roomId):null;
+  const countId=countRoomPickerCountId;
+  countRoomOpening={countId,roomId};
+  renderCountRoomPicker();
+  let result;
+  try{
+    result=typeof cloudAcquireCountRoom==='function'?await cloudAcquireCountRoom(countId,roomId):null;
+  }finally{
+    countRoomOpening=null;
+    renderCountRoomPicker();
+  }
+  // Closing or changing the picker while the request runs must not open a stale room.
+  if(countRoomPickerCountId!==countId){
+    if(result?.acquired&&typeof cloudReleaseCountRoom==='function')await cloudReleaseCountRoom(countId,roomId);
+    return;
+  }
   if(!result){toast('Could not reserve this room. Try again.',true);return;}
   if(!result.acquired){
     countRoomPickerLocks=countRoomPickerLocks.filter(lock=>lock.roomId!==roomId).concat(result.lock?[result.lock]:[]);
@@ -1525,7 +1545,7 @@ function renderInvRows(skipCapture=false){
   if(sortMode==='category')Object.values(groups).forEach(g=>{
     const sectionToken=encodeURIComponent(`${currentInvRoomId||''}|||${g.cat}|||${g.sub}`);
     const collapsed=!search&&!expandedInventorySections.has(sectionToken);
-    const progress=inventorySectionProgress(g.cat,g.sub);
+    const progress=inventorySectionProgress(g.cat,g.sub,roomScopedProducts,activeRoom);
     html+=`<section class="inv-count-section ${collapsed?'collapsed':''} ${progress.complete?'complete':''}" data-section-token="${sectionToken}">
       <button class="inv-section-header" type="button" aria-expanded="${!collapsed}" onclick="toggleInventorySection('${sectionToken}')">
         <span class="inv-section-title">${catBadge(g.cat)} <span>${escapeHtml(g.sub)}</span></span>

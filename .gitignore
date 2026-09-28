@@ -11,3 +11,6 @@ coverage/
 *.log
 .vercel
 .env*
+
+# Commit setup templates, never real environment files.
+!.env.example

@@ -372,24 +372,25 @@ async function transcribeVoiceRecording(){
     const form=new FormData();
     const extension=type.includes('mp4')?'m4a':type.includes('ogg')?'ogg':'webm';
     form.append('audio',audio,`count-recording.${extension}`);
-    const products=voiceContext==='count-extra'&&typeof currentRoomProducts==='function'?state.products.filter(product=>!product.archived&&!new Set(currentRoomProducts().map(item=>item.id)).has(product.id)):voiceContext==='recount'&&typeof recountSelectableProducts==='function'?recountSelectableProducts():state.products;
+    const assigned=voiceContext==='count-extra'&&typeof currentRoomProducts==='function'?new Set(currentRoomProducts().map(item=>item.id)):null;
+    const products=assigned?state.products.filter(product=>!product.archived&&!assigned.has(product.id)):voiceContext==='recount'&&typeof recountSelectableProducts==='function'?recountSelectableProducts():state.products;
     const vocabulary=[...new Set(products.flatMap(product=>[product.name,product.inventoryName].filter(Boolean)))].join(', ');
     form.append('vocabulary',vocabulary.slice(0,6000));
     const controller=new AbortController();
     voiceTranscriptionController=controller;
     const timeout=setTimeout(()=>controller.abort(),VOICE_TRANSCRIPTION_TIMEOUT_MS);
-    let response;
+    let response,data;
     try{
-      response=await fetch('/api/transcribe',{
+      response=await fetch('/month-end/api/transcribe',{
         method:'POST',
         body:form,
         signal:controller.signal
       });
+      data=await response.json();
     }finally{
       clearTimeout(timeout);
       if(voiceTranscriptionController===controller)voiceTranscriptionController=null;
     }
-    const data=await response.json().catch(()=>({}));
     if(!response.ok)throw new Error(data.error||'Transcription failed.');
 
     const transcript=String(data.text||'').trim();

@@ -39,7 +39,7 @@ export function workspaceMatches(identifier: string, organization: { name: strin
   return wantedWords.length > 0 && wantedWords.every((word) => organizationWords.has(word));
 }
 
-export async function getAccessContext(): Promise<AccessContext | null> {
+async function getWorkspaceMembership() {
   const supabase = await createClient();
   const { data: claimsData } = await supabase.auth.getClaims();
   const userId = claimsData?.claims?.sub;
@@ -65,7 +65,32 @@ export async function getAccessContext(): Promise<AccessContext | null> {
   const membership = selected?.membership;
 
   if (!membership) return null;
+  return { supabase, userId, claimsData, selected, membership };
+}
 
+// Room reservations need current membership and counting permission, not profile
+// details or the management controls used by the full workspace shell.
+export async function getCountRoomContext() {
+  const workspace = await getWorkspaceMembership();
+  if (!workspace) return null;
+  const { supabase, userId, membership } = workspace;
+  const privileged = membership.role === "owner" || membership.role === "admin";
+  const { data, error } = privileged
+    ? { data: null, error: null }
+    : await supabase.rpc("get_my_effective_access", { p_organization_id: membership.organization_id });
+  if (error) throw new Error("Counting permissions could not be loaded.");
+  return {
+    userId,
+    organizationId: membership.organization_id,
+    canCount: privileged || Boolean(data?.[0]?.permission_keys?.includes("counts.create")),
+    supabase,
+  };
+}
+
+export async function getAccessContext(): Promise<AccessContext | null> {
+  const workspace = await getWorkspaceMembership();
+  if (!workspace) return null;
+  const { supabase, userId, claimsData, selected, membership } = workspace;
   const [{ data: profile }, { data: effectiveRows }, { data: locationAuthority }, { data: regionAuthority }] = await Promise.all([
     supabase.from("profiles").select("display_name, email").eq("id", userId).maybeSingle(),
     supabase.rpc("get_my_effective_access", { p_organization_id: membership.organization_id }),

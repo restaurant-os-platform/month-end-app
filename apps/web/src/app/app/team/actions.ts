@@ -81,7 +81,7 @@ export async function createPreparedAccount(formData: FormData) {
   const jobTitle = String(formData.get("jobTitle") ?? "Team Member").trim();
   const departmentIds = values(formData, "departments");
   const permissionKeys = values(formData, "permissions");
-  if (!displayName || !email.includes("@") || temporaryPassword.length < 12 || !jobTitle || !permissionKeys.length) {
+  if (!displayName || !email.includes("@") || temporaryPassword.length < 6 || !/[a-z]/.test(temporaryPassword) || !/[0-9]/.test(temporaryPassword) || !jobTitle || !permissionKeys.length) {
     redirect(teamUrl(formData, { error: "invalid_prepared_account" }));
   }
 
