@@ -37,6 +37,9 @@ jobs:
       - name: Run application tests
         run: npm test
 
+      - name: Verify shared app grants
+        run: npm run test:module-access
+
       - name: Run type checking
         run: npm run typecheck
 

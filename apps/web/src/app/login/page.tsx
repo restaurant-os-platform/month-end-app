@@ -5,7 +5,7 @@ import { redirect } from "next/navigation";
 
 import { createClient } from "@/lib/supabase/server";
 import { login } from "./actions";
-import { sharedLoginEnabled } from "@/lib/restaurant-os/config";
+import { platformHomeUrl, sharedLoginEnabled } from "@/lib/restaurant-os/config";
 import { safeNext } from "@/lib/restaurant-os/policy";
 
 export const metadata: Metadata = { title: "Sign in" };
@@ -28,7 +28,22 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
   if (sharedLoginEnabled()) {
     const target = `/auth/restaurant-os/start?next=${encodeURIComponent(safeNext(params.next, "/app"))}`;
     if (!params.error) redirect(target);
-    return <main className="setup-page"><section className="setup-card"><h1>Unable to open Month End</h1><p role="alert">Your account could not be connected to an active workspace. Your administrator can check the connection and your access.</p><a href={modulePath(target)}>Try signing in again</a></section></main>;
+    const platformHome = platformHomeUrl();
+    const accessDenied = params.error === "workspace_access" || params.error === "account_suspended";
+    return (
+      <main className="setup-page">
+        <section className="setup-card">
+          <h1>{accessDenied ? "Month End access is unavailable" : "Unable to open Month End"}</h1>
+          <p role="alert">
+            {accessDenied
+              ? "This account does not have access to an active Month End workspace. Your administrator can check your Month End access."
+              : "Your sign-in could not be completed. Try again or return to Endvora to open your assigned apps."}
+          </p>
+          {platformHome ? <p><a href={platformHome}>Return to Endvora</a></p> : null}
+          <p><a href={modulePath(target)}>Try signing in again</a></p>
+        </section>
+      </main>
+    );
   }
   const supabase = await createClient();
   const { data } = await supabase.auth.getClaims();

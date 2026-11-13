@@ -11,6 +11,7 @@ import { MemberDirectory } from "./member-directory";
 import { PositionDirectory } from "./position-directory";
 import { PreparedAccountWizard } from "./prepared-account-wizard";
 import { ThemeBridge } from "./theme-bridge";
+import { platformHomeUrl, sharedLoginEnabled } from "@/lib/restaurant-os/config";
 
 export const metadata: Metadata = { title: "People & Access" };
 export const dynamic = "force-dynamic";
@@ -57,6 +58,18 @@ export default async function TeamPage({ searchParams }: TeamPageProps) {
 
   const supabase = await createClient();
   const params = await searchParams;
+  const platformHome = sharedLoginEnabled() ? platformHomeUrl() : null;
+  const sharedInvitation = platformHome ? new URL("/invitations", platformHome) : null;
+  if (sharedInvitation) {
+    sharedInvitation.searchParams.set("module", "month-end");
+    try {
+      const mappings: unknown = JSON.parse(process.env.RESTAURANT_OS_RESTAURANT_MAP ?? "{}");
+      if (mappings && typeof mappings === "object" && !Array.isArray(mappings)) {
+        const platformId = Object.entries(mappings).find(([, nativeId]) => nativeId === context.organizationId)?.[0];
+        if (platformId) sharedInvitation.searchParams.set("restaurant", platformId);
+      }
+    } catch { /* The shared workspace can still offer its authorized restaurant picker. */ }
+  }
   const [departmentsResult, permissionsResult, membershipsResult, departmentAssignmentsResult, permissionAssignmentsResult, profilesResult, invitationsResult, regionsResult, locationsResult, positionsResult, positionDepartmentsResult, positionPermissionsResult, membershipPositionsResult, membershipLocationsResult, reportingLinesResult] = await Promise.all([
     supabase.from("departments").select("id, name, location_id").eq("organization_id", context.organizationId).is("archived_at", null).order("name"),
     supabase.from("permission_definitions").select("key, area, label, description, manager_assignable").order("area").order("label"),
@@ -178,6 +191,10 @@ export default async function TeamPage({ searchParams }: TeamPageProps) {
           <div className="access-card-heading"><div><h2>Authority map</h2><p>Platform administration stays separate from restaurant authority.</p></div></div>
           <div className="hierarchy-tree"><strong>Month&apos;s End platform</strong><span>└ Platform Administrator</span><span>　└ {context.organizationName}</span>{regions.map((region) => <span key={region.id}>　　└ {region.name}<br />　　　└ Regional Manager{locations.filter((location) => location.region_id === region.id).map((location) => <span key={location.id}><br />　　　　└ {location.name}<br />　　　　　└ General Manager<br />　　　　　　└ Custom positions → People</span>)}</span>)}</div>
         </section>
+
+        {sharedInvitation && <section className="access-card">
+          <div className="access-card-heading"><div><h2>Shared app invitation</h2><p>Choose Month End, Tip Pool, or both with one Restaurant OS account.</p></div><a className="team-back" href={sharedInvitation.toString()}>Invite through Restaurant OS →</a></div>
+        </section>}
 
         <PreparedAccountWizard
           departments={visibleDepartments}

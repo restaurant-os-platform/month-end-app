@@ -12,12 +12,14 @@
     "lint": "npm run lint --workspace=@month-end/web",
     "typecheck": "npm run typecheck --workspace=@month-end/web",
     "test": "npm run test --workspace=@month-end/web",
-    "release:production": "node scripts/deploy-production.mjs"
+    "release:production": "node scripts/deploy-production.mjs",
+    "test:module-access": "node tests/platform-module-access.mjs"
   },
   "engines": {
     "node": ">=24"
   },
   "devDependencies": {
+    "@electric-sql/pglite": "0.5.16",
     "supabase": "2.109.1"
   }
 }

@@ -1,4 +1,6 @@
 import "server-only";
+import { trustedPlatformHome } from "./policy";
+
 export function sharedLoginEnabled() { return process.env.RESTAURANT_OS_SSO_ENABLED === "true"; }
 export function appOrigin() {
   const value = process.env.RESTAURANT_OS_MODULE_URL;
@@ -13,8 +15,12 @@ export function provider(): `custom:${string}` {
   return value as `custom:${string}`;
 }
 
+export function platformHomeUrl(): string | null {
+  return trustedPlatformHome(process.env.RESTAURANT_OS_URL, process.env.NODE_ENV === "development");
+}
+
 export function platformLogoutUrl() {
-  const value = process.env.RESTAURANT_OS_URL;
+  const value = platformHomeUrl();
   if (!value) throw new Error("Restaurant OS URL is not configured.");
   return new URL("/logout", value).toString();
 }
