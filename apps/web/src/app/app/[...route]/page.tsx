@@ -9,6 +9,8 @@ import {
   resolveWorkspaceRoute,
   workspaceRouteAlias,
 } from "@/lib/workspace/routes";
+import { sharedLoginEnabled } from "@/lib/restaurant-os/config";
+import { platformNavigationConfig } from "@/lib/restaurant-os/navigation";
 import { WorkspaceShell } from "../workspace-shell";
 
 export const dynamic = "force-dynamic";
@@ -39,6 +41,7 @@ export default async function WorkspacePage({ params }: WorkspacePageProps) {
   return (
     <>
       <WorkspaceShell
+        navigation={platformNavigationConfig(sharedLoginEnabled(), process.env.RESTAURANT_OS_URL, context.organizationId)}
         email={context.email}
         iframeQuery={legacyDestinationQuery(workspaceRoute.destination)}
         initialPath={workspaceRoute.canonicalPath}

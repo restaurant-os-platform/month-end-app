@@ -2634,3 +2634,12 @@ body.sidebar-collapsed .master-search-trigger:hover::after,body.sidebar-collapse
   .live-inv-filter-sheet .live-room-picker-button{display:flex;min-height:46px;}
   .live-inv-filter-done{display:flex;width:100%;min-height:46px;justify-content:center;}
 }
+
+[data-endvora-switcher][hidden]{display:none!important}
+.endvora-app-switcher{display:grid;place-items:center;flex-shrink:0;width:32px;height:36px;border:1px solid var(--sidebar-border);border-radius:8px;background:var(--sidebar-icon-bg);color:var(--sidebar-text);cursor:pointer}
+.sidebar-top:has(.endvora-app-switcher:not([hidden])){gap:7px}
+.sidebar-top:has(.endvora-app-switcher:not([hidden])) .sidebar-logo{min-width:0;flex:1}
+.sidebar-top:has(.endvora-app-switcher:not([hidden])) .sidebar-logo h1{font-size:.94rem;white-space:nowrap}
+.sidebar-top:has(.endvora-app-switcher:not([hidden])) .sidebar-logo h1 .brand-mark{display:none}
+body.sidebar-collapsed .sidebar-top:has(.endvora-app-switcher:not([hidden])){height:auto;flex-direction:column;gap:8px}
+.endvora-app-switcher:focus-visible{outline:2px solid var(--accent);outline-offset:3px}

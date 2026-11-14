@@ -11,7 +11,7 @@
 <title>Month&apos;s End Inventory</title>
 <meta name="description" content="Multi-department inventory counting, ordering, usage tracking, and reporting for hospitality teams."/>
 <meta name="app-version" content="1.0.0"/>
-<link rel="stylesheet" href="css/styles.css?v=fall-photo-orientation-1"/>
+<link rel="stylesheet" href="css/styles.css?v=platform-switcher-1"/>
 <link rel="stylesheet" href="css/dashboard.css?v=manager-brief-3"/>
 
 <!-- SheetJS for real .xlsx export; loadXLSXFallback() (defined below) swaps to a
@@ -29,6 +29,7 @@
   <div class="sidebar-top">
     <button class="sidebar-toggle" type="button" onclick="toggleSidebar()" title="Collapse sidebar" aria-label="Toggle sidebar">ME</button>
     <div class="sidebar-logo"><h1><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="6" height="6" rx="1"/><rect x="14" y="4" width="6" height="6" rx="1"/><rect x="4" y="14" width="6" height="6" rx="1"/><rect x="14" y="14" width="6" height="6" rx="1"/></svg></span>Month&apos;s End</h1><span>Inventory Manager</span></div>
+    <button type="button" data-endvora-switcher aria-expanded="false" hidden class="endvora-app-switcher" aria-label="Switch apps and restaurant" title="Switch apps and restaurant"><svg viewBox="0 0 20 20" width="18" height="18" fill="currentColor" aria-hidden="true"><rect x="2" y="2" width="6" height="6" rx="1.5"/><rect x="12" y="2" width="6" height="6" rx="1.5"/><rect x="2" y="12" width="6" height="6" rx="1.5"/><rect x="12" y="12" width="6" height="6" rx="1.5"/></svg></button>
   </div>
   <button class="master-search-trigger" id="master-search-trigger" type="button" onclick="openMasterSearch(this)" aria-label="Search everything" aria-haspopup="dialog">
     <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg></span>
@@ -106,6 +107,7 @@
     </button>
     <div class="mobile-nav-popover" id="mobile-more-menu" role="menu" aria-label="More">
       <span class="mobile-nav-popover-title">More</span>
+      <button type="button" role="menuitem" data-endvora-switcher aria-expanded="false" hidden><svg viewBox="0 0 20 20" width="18" height="18" fill="currentColor" aria-hidden="true"><rect x="2" y="2" width="6" height="6" rx="1.5"/><rect x="12" y="2" width="6" height="6" rx="1.5"/><rect x="2" y="12" width="6" height="6" rx="1.5"/><rect x="12" y="12" width="6" height="6" rx="1.5"/></svg><span><strong>Switch apps</strong><small>Restaurant and Endvora workspace</small></span></button>
       <button type="button" role="menuitem" data-mobile-page="products"><span aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m4 7 8-4 8 4-8 4-8-4Z"/><path d="m4 7 8 4 8-4M4 7v10l8 4 8-4V7M12 11v10"/></svg></span><span><strong>Products</strong><small>Counted inventory products</small></span></button>
       <button type="button" role="menuitem" data-mobile-page="menu"><span aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 3h12v18H6zM9 7h6M9 11h6M9 15h4"/></svg></span><span><strong>Menu</strong><small>Menu items, recipes, and prep</small></span></button>
       <button type="button" role="menuitem" data-mobile-page="insights"><span aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 18h6M10 22h4M8.5 15.5A7 7 0 1 1 15.5 15.5C14.5 16.2 14 17 14 18h-4c0-1-.5-1.8-1.5-2.5Z"/></svg></span><span><strong>Insights</strong><small>Inventory trends and alerts</small></span></button>
@@ -1334,5 +1336,6 @@
 <script src="js/routing.js?v=menu-library-5"></script>
 <script src="js/main.js?v=menu-card-view-1"></script>
 <script src="js/access.js?v=local-count-mode-1"></script>
+<script src="js/platform-switcher.js?v=1"></script>
 </body>
 </html>

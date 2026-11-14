@@ -1,9 +1,12 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import PlatformSwitcher from "@/components/platform/PlatformSwitcher";
+import type { PlatformNavigationConfig } from "@/lib/restaurant-os/navigation";
 import { modulePath } from "@/lib/module-path";
 
 type WorkspaceShellProps = {
+  navigation?: PlatformNavigationConfig | null;
   email: string;
   iframeQuery: string;
   initialPath: string;
@@ -18,9 +21,14 @@ type RouteMessage = {
   replace?: boolean;
 };
 
-export function WorkspaceShell({ email, iframeQuery, initialPath, organizationName, title }: WorkspaceShellProps) {
+export function WorkspaceShell({ email, iframeQuery, initialPath, organizationName, title, navigation }: WorkspaceShellProps) {
   const frameRef = useRef<HTMLIFrameElement>(null);
   const currentPathRef = useRef(initialPath);
+
+  useEffect(() => {
+    // A cached public frame can finish loading before React hydrates its onLoad.
+    frameRef.current?.contentDocument?.querySelectorAll<HTMLElement>("[data-endvora-switcher]").forEach(button => { button.hidden = !navigation; });
+  }, [navigation]);
 
   useEffect(() => {
     document.title = `${title} · Month End`;
@@ -53,10 +61,14 @@ export function WorkspaceShell({ email, iframeQuery, initialPath, organizationNa
 
   return (
     <main className="legacy-host">
+      <PlatformSwitcher config={navigation} frameRef={frameRef} />
       <iframe
         allow="microphone"
         className="legacy-frame"
-        onLoad={() => frameRef.current?.contentWindow?.postMessage({ type: "month-end:apply-route", path: initialPath }, window.location.origin)}
+        onLoad={() => {
+          frameRef.current?.contentDocument?.querySelectorAll<HTMLElement>("[data-endvora-switcher]").forEach(button => { button.hidden = !navigation; });
+          frameRef.current?.contentWindow?.postMessage({ type: "month-end:apply-route", path: initialPath }, window.location.origin);
+        }}
         ref={frameRef}
         src={`/month-end/legacy/index.html?${iframeQuery}`}
         title={`${organizationName} inventory workspace for ${email}`}

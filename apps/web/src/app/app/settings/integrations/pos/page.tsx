@@ -1,3 +1,4 @@
+import { PlatformBrand } from "@/components/platform/PlatformBrand";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { redirect } from "next/navigation";
@@ -125,7 +126,7 @@ export default async function PosIntegrationPage({ searchParams }: PageProps) {
 
   return <main className="team-shell pos-shell">
     <aside className="team-sidebar">
-      <Link className="legacy-brand" href="/app"><strong>Month&apos;s End</strong><span>{context.organizationName}</span></Link>
+      <PlatformBrand organizationId={context.organizationId} organizationName={context.organizationName} />
       <nav>
         <Link href="/app">← Inventory workspace</Link>
         <Link href="/app/people">People & Access</Link>
@@ -180,5 +181,5 @@ export default async function PosIntegrationPage({ searchParams }: PageProps) {
 }
 
 function IntegrationSchemaRequired({ context, error }: { context: Awaited<ReturnType<typeof requireAccessContext>>; error: string }) {
-  return <main className="team-shell pos-shell"><aside className="team-sidebar"><Link className="legacy-brand" href="/app"><strong>Month&apos;s End</strong><span>{context.organizationName}</span></Link></aside><section className="team-content pos-content"><header className="team-header"><div><p className="eyebrow">Settings · Integrations · POS</p><h1>Omnivore</h1><p>{context.organizationName}</p></div><Link className="team-back" href="/app">Done</Link></header><div className="form-alert" role="alert"><strong>Database migration required.</strong> Apply the provider-neutral POS migration before using this page. <small>{error}</small></div></section></main>;
+  return <main className="team-shell pos-shell"><aside className="team-sidebar"><PlatformBrand organizationId={context.organizationId} organizationName={context.organizationName} /></aside><section className="team-content pos-content"><header className="team-header"><div><p className="eyebrow">Settings · Integrations · POS</p><h1>Omnivore</h1><p>{context.organizationName}</p></div><Link className="team-back" href="/app">Done</Link></header><div className="form-alert" role="alert"><strong>Database migration required.</strong> Apply the provider-neutral POS migration before using this page. <small>{error}</small></div></section></main>;
 }

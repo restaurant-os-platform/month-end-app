@@ -1,3 +1,4 @@
+import { PlatformBrand } from "@/components/platform/PlatformBrand";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { headers } from "next/headers";
@@ -144,7 +145,7 @@ export default async function TeamPage({ searchParams }: TeamPageProps) {
     <main className={`team-shell ${params.embedded === "1" ? "team-shell-embedded" : ""}`}>
       <ThemeBridge />
       <aside className="team-sidebar">
-        <Link className="legacy-brand" href="/app"><strong>Month&apos;s End</strong><span>{context.organizationName}</span></Link>
+        <PlatformBrand organizationId={context.organizationId} organizationName={context.organizationName} />
         <nav>
           <Link href="/app">← Inventory workspace</Link>
           <span className="active">People & Access</span>
