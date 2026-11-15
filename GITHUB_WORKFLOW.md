@@ -28,3 +28,7 @@ Website releases do not automatically apply database migrations or deploy Supaba
 Proxy forwards the actual request path and query to protected pages, overwriting any caller-supplied context header and retaining refreshed session cookies. Missing sessions redirect to login with a safe destination; signed-in accounts needing workspace selection keep that destination through the chooser.
 
 Shared-login start/callback failures and retry links preserve both destination and explicit restaurant context. Native memberships still authorize the requested workspace. Required password setup retains the destination through form validation and completion; password rules and setup gates are unchanged. Local login and workspace forms use the same redirect validation. No database or authentication-provider configuration changes are required.
+
+## Shared sign-out (Task 10)
+
+The legacy inventory profile menu now navigates the top window to the shared sign-out confirmation. Native forms/API entry use the same confirmation before session mutation. Confirmed platform sign-out visits this module’s auto-submitted POST form, clears local credentials and workspace selection at `/month-end`, then continues to TipPool’s logout form on the trusted platform host. Recovery/PKCE cookies are also expired. The manual Continue button remains available without automatic submission. Standalone logout stays local. No provider or environment configuration changes are needed.

@@ -1,12 +1,9 @@
 "use server";
-import { sharedLoginEnabled, platformLogoutUrl } from "@/lib/restaurant-os/config";
-
 import { redirect } from "next/navigation";
-
-import { createClient } from "@/lib/supabase/server";
-
+import { sharedLoginEnabled, platformLogoutUrl } from "@/lib/restaurant-os/config";
+import { clearModuleSession } from "@/lib/restaurant-os/logout";
 export async function signOut() {
-  const supabase = await createClient();
-  await supabase.auth.signOut();
-  redirect(sharedLoginEnabled() ? platformLogoutUrl() : "/login");
+  if (sharedLoginEnabled()) redirect(platformLogoutUrl());
+  await clearModuleSession();
+  redirect("/login");
 }

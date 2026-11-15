@@ -1,12 +1,9 @@
 import { moduleUrl } from "@/lib/module-path";
 import { sharedLoginEnabled, platformLogoutUrl } from "@/lib/restaurant-os/config";
+import { clearModuleSession } from "@/lib/restaurant-os/logout";
 import { NextResponse } from "next/server";
-
-import { createClient } from "@/lib/supabase/server";
-
 export async function POST(request: Request) {
-  const supabase = await createClient();
-  await supabase.auth.signOut();
-  return NextResponse.redirect(sharedLoginEnabled() ? platformLogoutUrl() : moduleUrl("/login", request.url), 303);
+  if (sharedLoginEnabled()) return NextResponse.redirect(platformLogoutUrl(), 303);
+  await clearModuleSession();
+  return NextResponse.redirect(moduleUrl("/login", request.url), 303);
 }
-

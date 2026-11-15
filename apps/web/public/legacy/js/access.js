@@ -47,9 +47,8 @@
     window.profileCanAccessPage=(_profile,page)=>allowedPage(page);
     window.profileCanManageProfiles=()=>Boolean(access.canManageUsers);
     window.openCurrentProfileSettings=()=>{closeAllMenus();if(typeof dismissSidebarHoverMenu==='function')dismissSidebarHoverMenu(document.querySelector('.profile-menu-wrap'));showPage('profile',{profileOnly:true});};
-    window.logoutProfile=async()=>{
-      try{await fetch('/month-end/api/sign-out',{method:'POST',credentials:'include'});}catch(e){}
-      window.top.location.href='/month-end/login';
+    window.logoutProfile=()=>{
+      window.top.location.href='/month-end/auth/restaurant-os/sign-out';
     };
     window.setCurrentProfile=()=>toast('Each person now signs in with their own account.',true);
 
