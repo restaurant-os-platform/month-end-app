@@ -2,7 +2,7 @@
 // (Classic script sharing global scope; load order defined in index.html.)
 
 const THEME_STORAGE_KEY='keg_bar_theme_v2';
-const APP_THEMES=['slate','slate-blue','graphite','paper','hospitality','hospitality-light'];
+const APP_THEMES=['slate','slate-blue','graphite','paper','hospitality','hospitality-light','endvora'];
 const SIDEBAR_STORAGE_KEY='keg_bar_sidebar_collapsed';
 const PROFILE_STORAGE_KEY='keg_bar_current_profile';
 const APP_ACCESS_OPTIONS=[
@@ -34,6 +34,7 @@ function setTheme(theme,savePreference=true){
   try{localStorage.setItem(THEME_STORAGE_KEY,nextTheme);}catch(e){}
   updateThemeToggle(nextTheme);
   syncEmbeddedTheme(nextTheme);
+  if(window.parent!==window)window.parent.postMessage({type:"month-end:theme-change",theme:nextTheme},window.location.origin);
   requestAnimationFrame(()=>{
     const background=getComputedStyle(document.documentElement).getPropertyValue('--bg').trim();
     if(background)document.querySelector('meta[name="theme-color"]')?.setAttribute('content',background);

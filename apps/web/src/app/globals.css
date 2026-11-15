@@ -489,3 +489,10 @@ body:has(.team-shell-embedded) { background: transparent; }
 .me-switcher-home{border-top:1px solid var(--line);margin-top:12px;padding-top:14px;border-radius:0}
 .me-platform-switcher :focus-visible{outline:2px solid var(--amber);outline-offset:3px}
 @media(max-width:820px){.me-switcher-panel{position:fixed!important;left:16px!important;right:16px;top:auto!important;bottom:88px;width:auto;max-height:calc(100dvh - 120px)}}
+
+[data-theme="endvora"]{
+  color-scheme:light;
+  --ink:#302f29;--muted:#64665b;--line:#dcdad0;--paper:#fffdf9;--canvas:#f5f3ee;
+  --amber:#566c59;--amber-dark:#465c49;--amber-soft:#e4e9df;--green:#566c59;--danger:#a34336;
+}
+[data-theme="endvora"] :is(.team-content h1,.legacy-brand strong){font-family:Georgia,"Times New Roman",serif;font-weight:400;}

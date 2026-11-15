@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 
-const THEMES = new Set(["slate", "graphite", "paper", "hospitality", "hospitality-light"]);
+const THEMES = new Set(["slate", "graphite", "paper", "hospitality", "hospitality-light", "endvora"]);
 
 export function ThemeBridge() {
   useEffect(() => {

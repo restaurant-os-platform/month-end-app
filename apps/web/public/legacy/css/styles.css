@@ -2643,3 +2643,23 @@ body.sidebar-collapsed .master-search-trigger:hover::after,body.sidebar-collapse
 .sidebar-top:has(.endvora-app-switcher:not([hidden])) .sidebar-logo h1 .brand-mark{display:none}
 body.sidebar-collapsed .sidebar-top:has(.endvora-app-switcher:not([hidden])){height:auto;flex-direction:column;gap:8px}
 .endvora-app-switcher:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+
+/* Optional shared Endvora palette. Existing saved themes remain available. */
+[data-theme="endvora"]{
+  color-scheme:light;
+  --bg:#f5f3ee;--surface:#fffdf9;--surface2:#eeece5;--surface3:#e4e9df;
+  --accent:#566c59;--accent2:#465c49;--accent-rgb:86,108,89;--accent-contrast:#ffffff;
+  --text:#302f29;--text-muted:#64665b;--danger:#a34336;--success:#566c59;--warning:#916a28;
+  --border:#dcdad0;--radius:12px;--shadow:rgba(21,29,20,.1);
+  --row-selected:rgba(86,108,89,.08);--selection-bg:rgba(86,108,89,.08);--selection-border:rgba(86,108,89,.3);--focus-ring:rgba(86,108,89,.22);
+  --sidebar-bg:#f5f3ee;--sidebar-surface:#f5f3ee;--sidebar-text:#302f29;--sidebar-muted:#64665b;
+  --sidebar-border:#dcdad0;--sidebar-icon-bg:#e4e9df;--sidebar-hover:#eeece5;--sidebar-mobile:rgba(245,243,238,.97);
+}
+.theme-preview-endvora{--preview-bg:#f5f3ee;--preview-sidebar:#eeece5;--preview-surface:#fffdf9;--preview-border:#dcdad0;--preview-line:#566c59;}
+[data-theme="endvora"] body{background:var(--bg);}
+[data-theme="endvora"] .sidebar{box-shadow:none;}
+[data-theme="endvora"] :is(.page-header-text h2,.sidebar-logo h1){font-family:Georgia,"Times New Roman",serif;font-weight:400;letter-spacing:-.025em;}
+[data-theme="endvora"] .page-header-text h2{font-size:1.9rem;}
+[data-theme="endvora"] :is(.btn-primary,.settings-nav-item.active){background:var(--accent);color:var(--accent-contrast);box-shadow:none;}
+[data-theme="endvora"] .btn-primary:hover{background:var(--accent2);box-shadow:none;}
+@media(max-width:820px){[data-theme="endvora"] .page-header-text h2{font-size:1.65rem;}}

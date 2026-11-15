@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import PlatformSwitcher from "@/components/platform/PlatformSwitcher";
 import type { PlatformNavigationConfig } from "@/lib/restaurant-os/navigation";
+import { SAVED_THEMES } from "@/lib/themes";
 import { modulePath } from "@/lib/module-path";
 
 type WorkspaceShellProps = {
@@ -16,6 +17,7 @@ type WorkspaceShellProps = {
 
 type RouteMessage = {
   type?: string;
+  theme?: string;
   path?: string;
   title?: string;
   replace?: boolean;
@@ -42,6 +44,7 @@ export function WorkspaceShell({ email, iframeQuery, initialPath, organizationNa
 
     function receiveRoute(event: MessageEvent<RouteMessage>) {
       if (event.origin !== window.location.origin || event.source !== frameRef.current?.contentWindow) return;
+      if (event.data?.type === "month-end:theme-change" && SAVED_THEMES.some(theme => theme === event.data.theme)) document.documentElement.dataset.theme = event.data.theme;
       if (event.data?.type !== "month-end:route-change" || !event.data.path?.startsWith("/app/")) return;
       const nextPath = event.data.path;
       if (nextPath !== currentPathRef.current) {
