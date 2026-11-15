@@ -1,3 +1,4 @@
+import { rememberPlatformRestaurant } from "@/lib/restaurant-os/selection";
 import { moduleUrl } from "@/lib/module-path";
 import { mappedRestaurant } from "@/lib/restaurant-os/context";
 import { NextResponse } from "next/server";
@@ -37,6 +38,7 @@ export async function GET(request: Request) {
     return NextResponse.redirect(moduleUrl("/login?error=workspace_access", origin));
   }
   (await cookies()).set(WORKSPACE_COOKIE, org.slug, { httpOnly: true, sameSite: "lax", secure: process.env.NODE_ENV === "production", path: "/month-end", maxAge: 2592000 });
+  await rememberPlatformRestaurant(membership.organization_id);
   if (membership.must_change_password) return NextResponse.redirect(moduleUrl("/change-password", origin));
   const response = NextResponse.redirect(moduleUrl(next, origin));
   response.headers.set("Cache-Control", "no-store");

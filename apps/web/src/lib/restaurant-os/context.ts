@@ -7,3 +7,13 @@ export function mappedRestaurant(platformId: string | null): string | null {
   const value = Object.hasOwn(map, platformId) ? map[platformId] : null;
   return typeof value === "string" && /^[0-9a-f-]{36}$/i.test(value) ? value : null;
 }
+
+/** Reverse only a unique configured mapping; this preference never grants access. */
+export function platformRestaurant(nativeId: string): string | null {
+  try {
+    const map: unknown = JSON.parse(process.env.RESTAURANT_OS_RESTAURANT_MAP ?? "{}");
+    if (!map || typeof map !== "object" || Array.isArray(map)) return null;
+    const matches = Object.entries(map).filter(([, value]) => value === nativeId);
+    return matches.length === 1 ? matches[0][0] : null;
+  } catch { return null; }
+}

@@ -105,3 +105,9 @@ it("allows the module authorization bridge on the shared Endvora origin", async 
   const response = await authorizeBridge(new Request("https://endvora.com/month-end/oauth/authorize?authorization_id=request-123"));
   expect(response.headers.get("location")).toBe("https://endvora.com/oauth/authorize?authorization_id=request-123");
 });
+
+it("remembers the canonical restaurant only after native membership selection", async () => {
+  mocks.query.mockResolvedValue({ data: [{ organization_id: "11111111-1111-4111-8111-111111111111", organizations: { slug: "keg" } }] });
+  await GET(new Request("https://module.example/auth/restaurant-os/callback?code=single-use&restaurant=keg"));
+  expect(mocks.cookie).toHaveBeenCalledWith("restaurant-os-restaurant", "keg", expect.objectContaining({ path: "/", httpOnly: true }));
+});

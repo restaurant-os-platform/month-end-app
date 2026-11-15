@@ -69,6 +69,8 @@ export default function PlatformSwitcher({ config, frameRef }: { config?: Platfo
   useEffect(() => { latestToggle.current = toggle; });
   const selected = data?.restaurants.find(restaurant => restaurant.id === data.selectedId);
   if (!config) return null;
+  const selectionUrl = new URL("/workspace/select", config.origin).toString();
+  const currentHome = selected ? `${selectionUrl}?restaurant=${encodeURIComponent(selected.id)}` : home;
   return <div className="me-platform-switcher" ref={root}>
     {!frameRef && <button ref={trigger} type="button" className="me-switcher-trigger" aria-label="Switch apps and restaurant" title="Switch apps and restaurant" aria-expanded={open} aria-controls={id} onClick={toggle}>
       <svg viewBox="0 0 20 20" width="18" height="18" fill="currentColor" aria-hidden="true"><rect x="2" y="2" width="6" height="6" rx="1.5"/><rect x="12" y="2" width="6" height="6" rx="1.5"/><rect x="2" y="12" width="6" height="6" rx="1.5"/><rect x="12" y="12" width="6" height="6" rx="1.5"/></svg>
@@ -79,16 +81,17 @@ export default function PlatformSwitcher({ config, frameRef }: { config?: Platfo
       {error && <p role="status">Open Endvora to choose your restaurant and apps.</p>}
       {data && <>
         <p className="me-switcher-restaurant">{selected?.name ?? "Choose a restaurant"}</p>
-        {data.restaurants.length > 1 && <form method="get" action={home} className="me-switcher-form">
+        {data.restaurants.length > 1 && <form method="get" action={selectionUrl} className="me-switcher-form">
+          <input type="hidden" name="module" value="month-end" />
           <label htmlFor={`${id}-restaurant`}>Restaurant</label>
           <select id={`${id}-restaurant`} name="restaurant" defaultValue={selected?.id ?? ""} required><option value="" disabled>Choose a restaurant</option>{data.restaurants.map(restaurant => <option key={restaurant.id} value={restaurant.id}>{restaurant.name}</option>)}</select>
-          <button type="submit">Open workspace</button>
+          <button type="submit">Switch restaurant</button>
         </form>}
         <div className="me-switcher-apps"><p className="me-switcher-label">Your apps</p>
           {selected ? selected.modules.map(module => module === "month-end" ? <span key={module} className="me-switcher-current" aria-current="true">Month’s End <span aria-hidden="true">✓</span></span> : <a key={module} href={platformLaunchUrl(config.origin, selected, module)!}>Tip Pool <span aria-hidden="true">↗</span></a>) : <p>Select your restaurant in Endvora to see its apps.</p>}
         </div>
       </>}
-      <a className="me-switcher-home" href={home}>Endvora Home <span aria-hidden="true">→</span></a>
+      <a className="me-switcher-home" href={currentHome}>Endvora Home <span aria-hidden="true">→</span></a>
     </div>}
   </div>;
 }

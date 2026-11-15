@@ -1,5 +1,6 @@
 "use server";
 
+import { rememberPlatformRestaurant } from "@/lib/restaurant-os/selection";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
@@ -22,7 +23,7 @@ export async function chooseWorkspace(formData: FormData) {
 
   const { data: membership } = await supabase
     .from("memberships")
-    .select("id, must_change_password, organizations(slug)")
+    .select("id, organization_id, must_change_password, organizations(slug)")
     .eq("id", membershipId)
     .eq("user_id", userId)
     .eq("status", "active")
@@ -41,6 +42,8 @@ export async function chooseWorkspace(formData: FormData) {
     path: "/month-end",
     maxAge: 60 * 60 * 24 * 365,
   });
+
+  await rememberPlatformRestaurant(membership.organization_id);
 
   if (membership.must_change_password) redirect("/change-password");
   redirect(next);
