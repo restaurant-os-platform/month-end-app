@@ -20,13 +20,14 @@ const errors: Record<string, string> = {
 };
 
 type LoginPageProps = {
-  searchParams: Promise<{ email?: string; error?: string; next?: string; reset?: string; status?: string }>;
+  searchParams: Promise<{ email?: string; error?: string; next?: string; restaurant?: string; reset?: string; status?: string }>;
 };
 
 export default async function LoginPage({ searchParams }: LoginPageProps) {
   const params = await searchParams;
+  const next = safeNext(params.next, "/app");
   if (sharedLoginEnabled()) {
-    const target = `/auth/restaurant-os/start?next=${encodeURIComponent(safeNext(params.next, "/app"))}`;
+    const target = `/auth/restaurant-os/start?${new URLSearchParams({ next, ...(params.restaurant ? { restaurant: params.restaurant } : {}) })}`;
     if (!params.error) redirect(target);
     const platformHome = platformHomeUrl();
     const accessDenied = params.error === "workspace_access" || params.error === "account_suspended";
@@ -47,9 +48,8 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
   }
   const supabase = await createClient();
   const { data } = await supabase.auth.getClaims();
-  if (data?.claims) redirect("/choose-workspace");
+  if (data?.claims) redirect(`/choose-workspace?next=${encodeURIComponent(next)}`);
   const errorMessage = params.error ? errors[params.error] : null;
-  const next = params.next?.startsWith("/") && !params.next.startsWith("//") ? params.next : "/app";
 
   return (
     <main className="login-page">

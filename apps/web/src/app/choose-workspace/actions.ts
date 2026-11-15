@@ -1,5 +1,6 @@
 "use server";
 
+import { safeNext, loginReturnPath, passwordSetupPath } from "@/lib/restaurant-os/policy";
 import { rememberPlatformRestaurant } from "@/lib/restaurant-os/selection";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
@@ -7,19 +8,13 @@ import { redirect } from "next/navigation";
 import { WORKSPACE_COOKIE } from "@/lib/auth/context";
 import { createClient } from "@/lib/supabase/server";
 
-function safeNext(value: FormDataEntryValue | null) {
-  return typeof value === "string" && value.startsWith("/") && !value.startsWith("//")
-    ? value
-    : "/app";
-}
-
 export async function chooseWorkspace(formData: FormData) {
   const membershipId = String(formData.get("membershipId") ?? "");
-  const next = safeNext(formData.get("next"));
+  const next = safeNext(formData.get("next"), "/app");
   const supabase = await createClient();
   const { data: claimsData } = await supabase.auth.getClaims();
   const userId = claimsData?.claims?.sub;
-  if (!userId) redirect("/login");
+  if (!userId) redirect(loginReturnPath(next));
 
   const { data: membership } = await supabase
     .from("memberships")
@@ -32,7 +27,7 @@ export async function chooseWorkspace(formData: FormData) {
   const organization = Array.isArray(membership?.organizations)
     ? membership.organizations[0]
     : membership?.organizations;
-  if (!membership || !organization?.slug) redirect("/choose-workspace?error=workspace_access");
+  if (!membership || !organization?.slug) redirect(`/choose-workspace?error=workspace_access&next=${encodeURIComponent(next)}`);
 
   const cookieStore = await cookies();
   cookieStore.set(WORKSPACE_COOKIE, organization.slug, {
@@ -45,6 +40,6 @@ export async function chooseWorkspace(formData: FormData) {
 
   await rememberPlatformRestaurant(membership.organization_id);
 
-  if (membership.must_change_password) redirect("/change-password");
+  if (membership.must_change_password) redirect(passwordSetupPath(next));
   redirect(next);
 }

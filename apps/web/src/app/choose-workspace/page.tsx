@@ -1,3 +1,4 @@
+import { safeNext, loginReturnPath } from "@/lib/restaurant-os/policy";
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 
@@ -13,10 +14,11 @@ export default async function ChooseWorkspacePage({
   searchParams: Promise<{ error?: string; next?: string }>;
 }) {
   const params = await searchParams;
+  const next = safeNext(params.next, "/app");
   const supabase = await createClient();
   const { data: claimsData } = await supabase.auth.getClaims();
   const userId = claimsData?.claims?.sub;
-  if (!userId) redirect("/login");
+  if (!userId) redirect(loginReturnPath(next));
 
   const { data: memberships } = await supabase
     .from("memberships")
@@ -24,7 +26,7 @@ export default async function ChooseWorkspacePage({
     .eq("user_id", userId)
     .eq("status", "active");
 
-  if (!memberships?.length) redirect("/login?error=workspace_access");
+  if (!memberships?.length) redirect(loginReturnPath(next, "workspace_access"));
 
   return (
     <main className="setup-page">
@@ -43,7 +45,7 @@ export default async function ChooseWorkspacePage({
             return (
               <form action={chooseWorkspace} key={membership.id}>
                 <input name="membershipId" type="hidden" value={membership.id} />
-                <input name="next" type="hidden" value={params.next ?? "/app"} />
+                <input name="next" type="hidden" value={next} />
                 <button type="submit">
                   <span><strong>{organization.name}</strong><small>{membership.job_title || "Team member"}</small></span>
                   <i aria-hidden="true">›</i>

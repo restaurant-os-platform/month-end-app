@@ -19,3 +19,16 @@ export function trustedPlatformHome(value: string | undefined, development = fal
     return null;
   }
 }
+
+/** Keep retry context without treating a destination or restaurant as authority. */
+export function loginReturnPath(next: unknown, error?: string, restaurant?: string | null) {
+  const params = new URLSearchParams(error ? { error } : {});
+  params.set("next", safeNext(next, "/app"));
+  if (restaurant) params.set("restaurant", restaurant);
+  return `/login?${params}`;
+}
+export function passwordSetupPath(next: unknown, error?: string) {
+  const params = new URLSearchParams(error ? { error } : {});
+  params.set("next", safeNext(next, "/app"));
+  return `/change-password?${params}`;
+}

@@ -4,7 +4,7 @@ import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
 
 import { sharedLoginEnabled } from "@/lib/restaurant-os/config";
-import { safeNext } from "@/lib/restaurant-os/policy";
+import { safeNext, loginReturnPath, passwordSetupPath } from "@/lib/restaurant-os/policy";
 
 import { WORKSPACE_COOKIE } from "@/lib/auth/context";
 import { createClient } from "@/lib/supabase/server";
@@ -16,7 +16,7 @@ export async function login(formData: FormData) {
   if (sharedLoginEnabled()) redirect(`/auth/restaurant-os/start?next=${encodeURIComponent(next)}`);
 
   if (typeof email !== "string" || typeof password !== "string") {
-    redirect("/login?error=invalid_form");
+    redirect(loginReturnPath(next, "invalid_form"));
   }
 
   const supabase = await createClient();
@@ -26,7 +26,7 @@ export async function login(formData: FormData) {
   });
 
   if (error) {
-    redirect("/login?error=invalid_credentials");
+    redirect(loginReturnPath(next, "invalid_credentials"));
   }
 
   const { data: memberships, error: membershipError } = await supabase
@@ -37,7 +37,7 @@ export async function login(formData: FormData) {
 
   if (membershipError || !memberships?.length) {
     await supabase.auth.signOut();
-    redirect("/login?error=workspace_access");
+    redirect(loginReturnPath(next, "workspace_access"));
   }
 
   if (memberships.length > 1) redirect(`/choose-workspace?next=${encodeURIComponent(next)}`);
@@ -48,7 +48,7 @@ export async function login(formData: FormData) {
     : membership.organizations;
   if (!organization?.slug) {
     await supabase.auth.signOut();
-    redirect("/login?error=workspace_access");
+    redirect(loginReturnPath(next, "workspace_access"));
   }
 
   const cookieStore = await cookies();
@@ -60,7 +60,7 @@ export async function login(formData: FormData) {
     maxAge: 60 * 60 * 24 * 365,
   });
 
-  if (membership.must_change_password) redirect("/change-password");
+  if (membership.must_change_password) redirect(passwordSetupPath(next));
 
   redirect(next);
 }

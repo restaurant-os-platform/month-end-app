@@ -22,3 +22,9 @@ The release command requires GitHub CLI and existing Vercel CLI authentication. 
 The user chose to retain Vercel Hobby. Native Git integration cannot connect private organization repositories on this plan. Restaurant OS and TipPool therefore use the release command after GitHub checks pass. Month’s End is public and also has native GitHub deployment integration; avoid a duplicate manual deployment when its Git deployment already succeeded for the same commit. No paid plan change or repository visibility change is needed.
 
 Website releases do not automatically apply database migrations or deploy Supabase Edge Functions. Such changes must first be versioned in the owning repository and applied separately with appropriate validation. Database consolidation remains a separate task; publishing source does not activate it.
+
+## Month’s End direct links (Task 8)
+
+Proxy forwards the actual request path and query to protected pages, overwriting any caller-supplied context header and retaining refreshed session cookies. Missing sessions redirect to login with a safe destination; signed-in accounts needing workspace selection keep that destination through the chooser.
+
+Shared-login start/callback failures and retry links preserve both destination and explicit restaurant context. Native memberships still authorize the requested workspace. Required password setup retains the destination through form validation and completion; password rules and setup gates are unchanged. Local login and workspace forms use the same redirect validation. No database or authentication-provider configuration changes are required.

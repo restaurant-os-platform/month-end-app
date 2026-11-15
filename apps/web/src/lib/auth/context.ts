@@ -1,3 +1,5 @@
+import { requestDestination } from "@/lib/restaurant-os/return-path";
+import { loginReturnPath, passwordSetupPath } from "@/lib/restaurant-os/policy";
 import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
 
@@ -124,8 +126,12 @@ export async function getAccessContext(): Promise<AccessContext | null> {
 
 export async function requireAccessContext(options: { allowPasswordChange?: boolean } = {}) {
   const context = await getAccessContext();
-  if (!context) redirect("/login");
-  if (context.mustChangePassword && !options.allowPasswordChange) redirect("/change-password");
+  if (!context) {
+    const next = await requestDestination();
+    const { data } = await (await createClient()).auth.getClaims();
+    redirect(data?.claims?.sub ? `/choose-workspace?next=${encodeURIComponent(next)}` : loginReturnPath(next));
+  }
+  if (context.mustChangePassword && !options.allowPasswordChange) redirect(passwordSetupPath(await requestDestination()));
   return context;
 }
 

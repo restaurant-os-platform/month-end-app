@@ -70,7 +70,9 @@ it("requires choosing among multiple memberships", async () => {
 
 it("preserves mandatory password change", async () => {
   mocks.query.mockResolvedValue({ data: [{ organizations: { slug: "existing-org" }, must_change_password: true }] });
-  expect((await GET(request())).headers.get("location")).toBe("https://module.example/month-end/change-password");
+  const destination = new URL((await GET(request())).headers.get("location")!);
+  expect(destination.pathname).toBe("/month-end/change-password");
+  expect(destination.searchParams.get("next")).toBe("/reports?month=9");
 });
 
 it("rejects an unmapped restaurant before starting OAuth", async () => {
@@ -110,4 +112,24 @@ it("remembers the canonical restaurant only after native membership selection", 
   mocks.query.mockResolvedValue({ data: [{ organization_id: "11111111-1111-4111-8111-111111111111", organizations: { slug: "keg" } }] });
   await GET(new Request("https://module.example/auth/restaurant-os/callback?code=single-use&restaurant=keg"));
   expect(mocks.cookie).toHaveBeenCalledWith("restaurant-os-restaurant", "keg", expect.objectContaining({ path: "/", httpOnly: true }));
+});
+
+it("preserves bookmark and restaurant through shared login and workspace validation", async () => {
+ const next="/app/team?tab=pending";
+ mocks.query.mockResolvedValue({data:[{organization_id:"11111111-1111-4111-8111-111111111111",organizations:{slug:"keg"}}]});
+ await start(new Request(`https://module.example/month-end/auth/restaurant-os/start?next=${encodeURIComponent(next)}&restaurant=keg`));
+ const callback=new URL(mocks.oauth.mock.calls[0][0].options.redirectTo);expect(callback.searchParams.get("next")).toBe(next);
+ callback.searchParams.set("code","single-use");
+ expect((await GET(new Request(callback))).headers.get("location")).toBe("https://module.example/month-end"+next);
+});
+it("preserves retry context when a code has expired", async () => {
+ mocks.exchange.mockResolvedValue({data:{},error:{message:"expired"}});
+ const response=await GET(new Request("https://module.example/month-end/auth/restaurant-os/callback?code=expired&next=%2Fapp%2Fteam%3Ftab%3Dpending&restaurant=keg"));
+ const retry=new URL(response.headers.get("location")!);
+ expect(retry.pathname).toBe("/month-end/login");expect(retry.searchParams.get("next")).toBe("/app/team?tab=pending");expect(retry.searchParams.get("restaurant")).toBe("keg");expect(mocks.cookie).not.toHaveBeenCalled();
+});
+it("preserves retry context when OAuth cannot start", async () => {
+ mocks.oauth.mockResolvedValue({data:{},error:{message:"unavailable"}});
+ const response=await start(new Request("https://module.example/month-end/auth/restaurant-os/start?next=%2Fapp%2Factivity&restaurant=keg"));
+ const retry=new URL(response.headers.get("location")!);expect(retry.searchParams.get("next")).toBe("/app/activity");expect(retry.searchParams.get("restaurant")).toBe("keg");
 });
