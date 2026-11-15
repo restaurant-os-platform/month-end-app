@@ -1,3 +1,4 @@
+import { PASSWORD_MIN_LENGTH, PASSWORD_MAX_LENGTH, PASSWORD_REQUIREMENT, PASSWORD_MISMATCH, PASSWORD_SAVE_FAILED } from "@/lib/auth/password";
 import { safeNext } from "@/lib/restaurant-os/policy";
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
@@ -9,9 +10,9 @@ export const metadata: Metadata = { title: "Set your password" };
 export const dynamic = "force-dynamic";
 
 const errors: Record<string, string> = {
-  weak_password: "Use at least 6 characters, including a lowercase letter and a number.",
-  password_mismatch: "The passwords do not match.",
-  update_failed: "Your password could not be updated. Please try again.",
+  weak_password: PASSWORD_REQUIREMENT,
+  password_mismatch: PASSWORD_MISMATCH,
+  update_failed: PASSWORD_SAVE_FAILED,
 };
 
 export default async function ChangePasswordPage({ searchParams }: { searchParams: Promise<{ error?: string; next?: string }> }) {
@@ -28,8 +29,8 @@ export default async function ChangePasswordPage({ searchParams }: { searchParam
     {params.error ? <div className="form-alert" role="alert">{errors[params.error] ?? errors.update_failed}</div> : null}
     <form action={completePasswordSetup} className="auth-form">
       <input type="hidden" name="next" value={next} />
-      <label><span>New password</span><input name="password" type="password" autoComplete="new-password" minLength={6} required /></label>
-      <label><span>Confirm password</span><input name="passwordConfirmation" type="password" autoComplete="new-password" minLength={6} required /></label>
+      <label><span>New password</span><small>{PASSWORD_REQUIREMENT}</small><input name="password" type="password" autoComplete="new-password" minLength={PASSWORD_MIN_LENGTH} maxLength={PASSWORD_MAX_LENGTH} required /></label>
+      <label><span>Confirm password</span><input name="passwordConfirmation" type="password" autoComplete="new-password" minLength={PASSWORD_MIN_LENGTH} maxLength={PASSWORD_MAX_LENGTH} required /></label>
       <button type="submit">Save password and continue</button>
     </form>
   </section></main>;

@@ -1,3 +1,4 @@
+import { PASSWORD_MIN_LENGTH, PASSWORD_MAX_LENGTH, PASSWORD_REQUIREMENT, PASSWORD_MISMATCH, PASSWORD_SAVE_FAILED } from "@/lib/auth/password";
 import type { Metadata } from "next";
 import Link from "next/link";
 
@@ -16,9 +17,9 @@ type InvitePageProps = {
 
 const errors: Record<string, string> = {
   invalid_invitation: "This invitation is no longer available.",
-  weak_password: "Use at least 6 characters, including a lowercase letter and a number.",
-  password_mismatch: "The two passwords do not match.",
-  account_failed: "An account already exists for this email, or signup could not be completed. Sign in and return to this invitation.",
+  weak_password: PASSWORD_REQUIREMENT,
+  password_mismatch: PASSWORD_MISMATCH,
+  account_failed: PASSWORD_SAVE_FAILED,
   accept_failed: "This invitation does not match the signed-in account.",
   email_failed: "The secure setup email could not be sent. Please wait a moment and try again.",
 };
@@ -52,8 +53,8 @@ export default async function InvitePage({ params, searchParams }: InvitePagePro
           {query.error ? <div className="form-alert" role="alert">{errors[query.error]}</div> : null}
           <form action={finishEmailedInvitation} className="auth-form">
             <input name="token" type="hidden" value={token} />
-            <label><span>Choose a password</span><input name="password" type="password" autoComplete="new-password" minLength={6} required /><small>At least 6 characters, including a lowercase letter and a number.</small></label>
-            <label><span>Confirm password</span><input name="passwordConfirmation" type="password" autoComplete="new-password" minLength={6} required /></label>
+            <label><span>Choose a password</span><input name="password" type="password" autoComplete="new-password" minLength={PASSWORD_MIN_LENGTH} maxLength={PASSWORD_MAX_LENGTH} required /><small>{PASSWORD_REQUIREMENT}</small></label>
+            <label><span>Confirm password</span><input name="passwordConfirmation" type="password" autoComplete="new-password" minLength={PASSWORD_MIN_LENGTH} maxLength={PASSWORD_MAX_LENGTH} required /></label>
             <button type="submit">Set password and join</button>
           </form>
         </> : signedIn ? <>

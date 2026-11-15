@@ -37,7 +37,7 @@ it("carries the bookmark through required password setup",async()=>{
  mocks.member.mockResolvedValue({data:{organization_id:"org",must_change_password:true,organizations:{slug:"kitchen"}}});
  await expect(chooseWorkspace(form())).rejects.toThrow("redirect:/change-password?next=%2Fapp%2Fteam%3Ftab%3Dpending");
  const html=renderToStaticMarkup(await ChangePasswordPage({searchParams:Promise.resolve({next})}));expect(html).toContain('name="next" value="/app/team?tab=pending"');
- const data=form();data.set("password","testpass1");data.set("passwordConfirmation","testpass1");
+ const data=form();data.set("password","Test passphrase 123");data.set("passwordConfirmation","Test passphrase 123");
  await expect(completePasswordSetup(data)).rejects.toThrow(`redirect:${next}`);
  expect(mocks.complete).toHaveBeenCalledWith("complete_first_login",{p_membership_id:"member"});
 });

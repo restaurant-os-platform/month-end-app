@@ -1,5 +1,7 @@
 "use server";
 
+import { validNewPassword } from "@/lib/auth/password";
+
 import { timingSafeEqual } from "node:crypto";
 import { redirect } from "next/navigation";
 
@@ -26,11 +28,7 @@ export async function activateOwner(formData: FormData) {
   }
 
   if (
-    typeof password !== "string"
-    || password.length < 6
-    || !/[a-z]/.test(password)
-
-    || !/[0-9]/.test(password)
+    !validNewPassword(password)
   ) {
     redirect(`/activate?token=${encodeURIComponent(token)}&error=weak_password`);
   }

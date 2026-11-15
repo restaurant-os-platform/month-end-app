@@ -1,14 +1,16 @@
 "use server";
 
+import { validNewPassword } from "@/lib/auth/password";
+
 import { redirect } from "next/navigation";
 
 import { createRecoveryClient } from "@/lib/supabase/server";
-import { sharedLoginEnabled } from "@/lib/restaurant-os/config";
+import { accountSignInDestination } from "@/lib/restaurant-os/account-help";
 
 export async function updatePassword(formData: FormData) {
-  const password = String(formData.get("password") ?? "");
+  const password = formData.get("password");
   const confirmation = String(formData.get("passwordConfirmation") ?? "");
-  if (password.length < 6 || !/[a-z]/.test(password) || !/[0-9]/.test(password)) redirect("/reset-password?error=weak_password");
+  if (!validNewPassword(password)) redirect("/reset-password?error=weak_password");
   if (password !== confirmation) redirect("/reset-password?error=password_mismatch");
 
   const supabase = await createRecoveryClient();
@@ -17,6 +19,5 @@ export async function updatePassword(formData: FormData) {
   const { error } = await supabase.auth.updateUser({ password });
   if (error) redirect("/reset-password?error=update_failed");
   await supabase.auth.signOut({ scope: "local" });
-  if (sharedLoginEnabled() && process.env.RESTAURANT_OS_URL) redirect(new URL("/login", process.env.RESTAURANT_OS_URL).toString());
-  redirect("/login?reset=1");
+  redirect(`${accountSignInDestination()}?reset=1`);
 }

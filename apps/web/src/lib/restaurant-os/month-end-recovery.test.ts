@@ -29,16 +29,16 @@ it("rejects external confirmation destinations", async () => {
   const response = await GET(new Request("https://month.example/auth/callback?code=confirmation&next=//evil.example"));
   expect(response.headers.get("location")).toBe("https://endvora.com/month-end/app");
 });
-it("accepts six characters with lowercase and a number without uppercase or symbols", async () => {
+it("accepts the shared 12–72 character password rule", async () => {
   mocks.getUser.mockResolvedValue({ data: { user: { id: "recovery-user" } } });
   mocks.updateUser.mockResolvedValue({ error: null });
   const form = new FormData();
-  form.set("password", "abc123"); form.set("passwordConfirmation", "abc123");
+  form.set("password", "A long passphrase 123"); form.set("passwordConfirmation", "A long passphrase 123");
   await expect(updatePassword(form)).rejects.toThrow(); // Next.js redirect after success.
-  expect(mocks.updateUser).toHaveBeenCalledWith({ password: "abc123" });
+  expect(mocks.updateUser).toHaveBeenCalledWith({ password: "A long passphrase 123" });
   expect(mocks.signOut).toHaveBeenCalledWith({ scope: "local" });
 });
-it.each(["abc12", "abcdef", "123456", "ABC123"])("rejects a password missing the remaining requirements: %s", async password => {
+it.each(["abc12", "abcdef", "123456", "ABC123", "x".repeat(73)])("rejects a password outside the shared length requirement: %s", async password => {
   const form = new FormData();
   form.set("password", password); form.set("passwordConfirmation", password);
   await expect(updatePassword(form)).rejects.toThrow();

@@ -32,3 +32,7 @@ Shared-login start/callback failures and retry links preserve both destination a
 ## Shared sign-out (Task 10)
 
 The legacy inventory profile menu now navigates the top window to the shared sign-out confirmation. Native forms/API entry use the same confirmation before session mutation. Confirmed platform sign-out visits this module’s auto-submitted POST form, clears local credentials and workspace selection at `/month-end`, then continues to TipPool’s logout form on the trusted platform host. Recovery/PKCE cookies are also expired. The manual Continue button remains available without automatic submission. Standalone logout stays local. No provider or environment configuration changes are needed.
+
+## Account help (Task 11)
+
+New-password forms and server validation use the same 12–72-character policy as Endvora. Existing sign-in passwords and invitation/grant behavior are unchanged. Recovery retains its isolated session, uses a module-prefixed callback, and returns shared users to platform login with a reset confirmation. Help pages provide neutral email status, rate-limit guidance and explicit sign-in/new-link navigation. Tests mock email and credential updates; no real emails or passwords are changed during verification. No provider configuration or migration is required.

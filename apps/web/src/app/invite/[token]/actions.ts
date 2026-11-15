@@ -1,5 +1,7 @@
 "use server";
 
+import { validNewPassword } from "@/lib/auth/password";
+
 import { createHash } from "node:crypto";
 import { redirect } from "next/navigation";
 
@@ -38,7 +40,7 @@ export async function acceptInvitation(formData: FormData) {
 
 export async function finishEmailedInvitation(formData: FormData) {
   const token = String(formData.get("token") ?? "");
-  const password = String(formData.get("password") ?? "");
+  const password = formData.get("password");
   const passwordConfirmation = String(formData.get("passwordConfirmation") ?? "");
   const supabase = await createClient();
   const { data: details } = await supabase.rpc("get_invitation_details", { p_token_hash: hashToken(token) });
@@ -49,7 +51,7 @@ export async function finishEmailedInvitation(formData: FormData) {
   if (!invitation || invitation.status !== "pending" || invitation.email.toLowerCase() !== signedInEmail) {
     redirect(`/invite/${token}?error=accept_failed&ready=1`);
   }
-  if (password.length < 6 || !/[a-z]/.test(password) || !/[0-9]/.test(password)) {
+  if (!validNewPassword(password)) {
     redirect(`/invite/${token}?error=weak_password&ready=1`);
   }
   if (password !== passwordConfirmation) redirect(`/invite/${token}?error=password_mismatch&ready=1`);

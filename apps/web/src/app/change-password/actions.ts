@@ -1,5 +1,7 @@
 "use server";
 
+import { validNewPassword } from "@/lib/auth/password";
+
 import { safeNext, passwordSetupPath } from "@/lib/restaurant-os/policy";
 import { redirect } from "next/navigation";
 
@@ -9,9 +11,9 @@ import { createClient } from "@/lib/supabase/server";
 export async function completePasswordSetup(formData: FormData) {
   const context = await requireAccessContext({ allowPasswordChange: true });
   const next = safeNext(formData.get("next"), "/app");
-  const password = String(formData.get("password") ?? "");
+  const password = formData.get("password");
   const confirmation = String(formData.get("passwordConfirmation") ?? "");
-  if (password.length < 6 || !/[a-z]/.test(password) || !/[0-9]/.test(password)) redirect(passwordSetupPath(next, "weak_password"));
+  if (!validNewPassword(password)) redirect(passwordSetupPath(next, "weak_password"));
   if (password !== confirmation) redirect(passwordSetupPath(next, "password_mismatch"));
 
   const supabase = await createClient();

@@ -1,3 +1,4 @@
+import { PASSWORD_MIN_LENGTH, PASSWORD_MAX_LENGTH, PASSWORD_REQUIREMENT, PASSWORD_MISMATCH } from "@/lib/auth/password";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { redirect } from "next/navigation";
@@ -10,8 +11,8 @@ export const dynamic = "force-dynamic";
 
 const errors: Record<string, string> = {
   invalid_link: "This activation link is not valid.",
-  weak_password: "Use at least 6 characters, including a lowercase letter and a number.",
-  password_mismatch: "The two passwords do not match.",
+  weak_password: PASSWORD_REQUIREMENT,
+  password_mismatch: PASSWORD_MISMATCH,
   setup_unavailable: "Owner setup is temporarily unavailable.",
   activation_failed: "We could not start activation. Please try again.",
 };
@@ -65,12 +66,12 @@ export default async function ActivatePage({ searchParams }: ActivatePageProps) 
               </label>
               <label>
                 <span>Choose a password</span>
-                <input name="password" type="password" autoComplete="new-password" minLength={6} required />
-                <small>At least 6 characters, including a lowercase letter and a number.</small>
+                <input name="password" type="password" autoComplete="new-password" minLength={PASSWORD_MIN_LENGTH} maxLength={PASSWORD_MAX_LENGTH} required />
+                <small>{PASSWORD_REQUIREMENT}</small>
               </label>
               <label>
                 <span>Confirm password</span>
-                <input name="passwordConfirmation" type="password" autoComplete="new-password" minLength={6} required />
+                <input name="passwordConfirmation" type="password" autoComplete="new-password" minLength={PASSWORD_MIN_LENGTH} maxLength={PASSWORD_MAX_LENGTH} required />
               </label>
               <button type="submit">Create Owner account</button>
             </form>
